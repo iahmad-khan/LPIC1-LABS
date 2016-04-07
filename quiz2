@@ -1,0 +1,63 @@
+
+
+1) You can install "aptitude" using "dselect".
+
+Correct
+Correct answer
+
+True
+
+2) The command "dpkg -I package.deb" will install the package.deb application with all dependencies.
+
+Correct
+Correct answer
+
+False
+
+3) The command "aptitude autoclean" will remove all other package managers on the system.
+
+Correct
+Correct answer
+
+False
+
+4) The "sources.list" contains which of the following?
+
+Correct
+Correct answer
+
+All listed answers
+
+5) The command "sudo apt-get install -s -q mypackage" will have what effect?
+
+Correct
+Correct answer
+
+Will quietly simulate the installation of
+
+6) The "aptitude" utility can be used as a replacement to "apt-get".
+
+Correct
+Correct answer
+
+True
+
+7) The command "sudo apt-get install -f" can be used to complete the installation of a package installed with "dpkg" that had missing dependencies.
+
+Correct
+Correct answer
+
+True
+
+8) The command "sudo apt-get upgrade" will update Ubuntu 12.04 to Ubuntu 12.10 if that newer version is available.
+
+Correct answer
+
+False
+
+9) Which of the following commands will uninstall a package and all of its dependent configuration files?
+
+Correct
+Correct answer
+
+dpkg --purge packagename
