@@ -1,0 +1,120 @@
+1. Create a directory in your home directory called 'myscripts'. Create an empty script in that directory called 'mycron.sh'.
+
+ 
+
+    mkdir myscripts
+    cd myscripts/
+    touch mycron.sh
+
+ 
+
+2.  Edit the newly created mycron.sh file. Add the appropriate shell notification comment at the top that will identify it as a script. The script should do the following: 
+
+    Echo the date and time to the terminal
+    Show all mounts and drive space
+    Echo the date and time to the terminal (second time)
+    List the free memory on the system
+
+ 
+
+    vim mycron.sh
+    cat mycron.sh
+
+    #!/bin/bash
+
+    echo date
+    df -h
+    echo date
+    free -m
+    chmod 755 mycron.sh
+    ll
+
+    total 4
+    -rwxr-xr-x. 1 user user 53 Sep 16 14:45 mycron.sh
+
+ 
+
+3.  Make sure the script, once saved, is executable. Using the appropriate command to edit your user CRON, add a line that calls this script each hour of every day of the month.
+
+ 
+
+    crontab -e
+
+    no crontab for user - using an empty one
+    crontab: installing new crontab
+
+    crontab -l
+
+    0 * * * * /home/user/myscripts/mycron.sh
+
+ 
+
+4.  Comment out the command in Step #3 in CRON. Create a new line that calls the script five minutes from now. View the results in the appropriate CRON log file.
+
+ 
+
+    crontab -e
+
+    crontab: installing new crontab
+
+    crontab -l
+
+    # 0 * * * * /home/user/myscripts/mycron.sh
+    55 14 * * * /home/user/myscripts/mycron.sh
+
+    cat /var/log/cron
+
+    Sep 16 14:55:01 tcox2 CROND[1821]: (user) CMD (/home/user/myscripts/mycron.sh)
+    You have new mail in /var/spool/mail/user
+
+ 
+
+5.  Edit the command in Step #4 so that it runs again in five minutes. Add the appropriate redirection so that standard output and errors are logged to a file in your home directory and the myscripts location called mycron.log. Verify both the output and the file creation. 
+
+ 
+
+    crontab -e
+
+    crontab: installing new crontab
+    Wed Sep 16 15:04:05 UTC 2015
+
+    crontab -l
+
+    # 0 * * * * /home/user/myscripts/mycron.sh
+    # 55 14 * * * /home/user/myscripts/mycron.sh
+    05 15 * * * /home/user/myscripts/mycron.sh >> /home/user/myscripts/cron.log 2>&1 
+
+    date
+
+    Wed Sep 16 15:05:01 UTC 2015
+
+    cd myscripts/
+    ll
+
+    total 8
+    -rw-r--r--. 1 user user 489 Sep 16 15:05 cron.log
+    -rwxr-xr-x. 1 user user  53 Sep 16 14:45 mycron.sh
+
+    cat cron.log
+    date
+
+    Filesystem      Size  Used Avail Use% Mounted on
+    /dev/xvda1       20G  4.6G   16G  23% /
+    devtmpfs        477M     0  477M   0% /dev
+    tmpfs           497M   84K  496M   1% /dev/shm
+    tmpfs           497M   13M  484M   3% /run
+    tmpfs           497M     0  497M   0% /sys/fs/cgroup
+
+    date
+
+                  total        used        free      shared  buff/cache   available
+    Mem:            992         328         401          13         261         498
+    Swap:          2047           0        2047
+
+    cat /var/log/cron
+
+    ...
+    Sep 16 15:05:01 tcox2 CROND[1869]: (user) CMD (/home/user/myscripts/mycron.sh >> /home/user/myscripts/cron.log 2>&1)
+
+ 
+Assess Your Work: Cron Jobs
