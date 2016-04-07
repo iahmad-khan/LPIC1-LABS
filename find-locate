@@ -1,0 +1,114 @@
+1.  In user's home directory, create a text file with any content called testfile.txt. You may use any method you choose to create this file.
+
+ 
+
+    Possible Solutions:
+
+    echo "testing" > testfile.txt
+
+    touch testfile.txt
+
+ 
+
+2.  Make a copy of the recently created testfile.txt into a file called mytest.txt using any method you would like. Using the appropriate privileges, move that file to the /etc directory.
+
+ 
+
+    Possible Solutions:
+
+    cp testfile.txt mytest.txt && sudo mv mytest.txt /etc
+
+    (NOTE: you can execute that command on one line or in subsequent lines)
+
+    sudo cp testfile.txt /etc/mytest.txt
+
+ 
+
+3.  Make sure you are in your user home directory. Execute a find command to display the location of the testfile.txt text file created in Step #1. Execute the same command but specify that the search should begin with the /home directory and note the results.
+
+ 
+
+    find -name testfile.txt
+
+    testfile.txt
+
+    find /home -name testfile.txt
+
+    find: /home/testusers: Permission Denied (any accounts in /home not owned by user)
+    /home/user/testfile.txt
+
+ 
+
+4.  As the user user, execute a find command with the appropriate options to display the location of the file called mytest.txt. Start the search from the root (i.e. /) directory. Re-execute that command as the root user or with sudo privileges and note the results.
+
+ 
+
+    find / -name mytest.txt
+
+    [Permission Denied messages], no file found
+
+    sudo find / -name mytest.txt
+
+    /etc/mytest.txt
+
+ 
+
+5.  Using appropriate privileges, copy the /etc/mytest.txt file to /etc/myTesT.txt. Execute a find command on that name that will show the results of both files (i.e. ignore the case in the filenames).
+
+ 
+
+    sudo cp /etc/mytest.txt /etc/myTesT.txt
+    sudo find / -iname mytest.txt
+
+    /etc/myTesT.txt
+    /etc/mytest.txt
+
+ 
+
+6.  As the root user or executing the command with sudo privileges, find all files on the system that end with .txt, paginate the results so you can scroll through them.
+
+ 
+
+    sudo find / -name "*.txt" | more
+
+    [A lot of results should appear as there are a lot of text files on any Linux system]
+
+ 
+
+7.  Using the find command, change the permissions on the /etc/myTesT.txt file so that it is universal read/write/execute. This should be done in one line using the find command options only.
+
+ 
+
+    sudo find / -name myTesT.txt -exec chmod 777 {} \;
+    sudo ls -al /etc/myTest.txt
+
+    -rwxrwxrwx 1 root root 8 Aug  2 17:00 /etc/myTesT.txt
+
+ 
+
+8.  With the find command, using root or sudo privileges, display all executable files in /usr directory.
+
+ 
+
+    sudo find /usr -perm /a=x
+
+    [A number of directories and files in /usr that should have executable permissions will list here]
+
+ 
+
+9.  Run the updatedb command to update your filesystem name database using appropriate root or sudo privileges. Use the locate command to find all three files you created in Steps 1, 2 and 5.
+
+ 
+
+    updatedb
+    locate testfile.txt
+
+    /home/user/testfile.txt
+
+    locate mytest.txt
+
+    /etc/mytest.txt
+
+    locate myTesT.txt
+
+    /etc/myTesT.txt
