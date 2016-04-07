@@ -1,0 +1,163 @@
+1. Running the appropriate command as 'sudo', list all of the packages currently installed on the system using the appropriate package management command and options.
+
+    user@linuxacademy:~$ sudo dpkg -l
+
+    (Output)
+
+    Desired=Unknown/Install/Remove/Purge/Hold
+
+    | Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+
+    |/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+
+    ||/ Name                                                 Version                                    Architecture Description
+
+    +++-====================================================-==========================================-============-========================================================
+
+    =======================
+
+    ii  account-plugin-aim                                   3.12.9-1ubuntu1.1                          amd64        Messaging account plugin for AIM
+
+    ii  account-plugin-facebook                              0.12+15.04.20150415.1-0ubuntu2             all          GNOME Control Center account plugin for single signon -
+
+    facebook
+
+    (Output) NOTE: Your output will differ based on the packages installed on your system
+
+     
+
+2. The package called 'linux-generic' will be installed on your system. Using the appropriate package management command and options, list the files and directories that are installed with that package.
+
+    user@linuxacademy:~$ sudo dpkg -L linux-generic
+
+    (Output)
+
+    /.
+
+    /usr
+
+    /usr/share
+
+    /usr/share/doc
+
+    /usr/share/doc/linux-generic
+
+    /usr/share/doc/linux-generic/copyright
+
+    /usr/share/doc/linux-generic/changelog.gz
+
+    (Output) NOTE: Your output may be slightly different depending on kernel version and distribution
+
+ 
+
+ 3. Using the standard Debian/Ubuntu based "advanced packaging tool", install and then remove the package called 'nano' and note the results.
+
+    user@linuxacademy:~$ sudo apt-get install nano
+
+    (Output)
+
+    Reading package lists... Done
+
+    Building dependency tree
+
+    Reading state information... Done
+
+    Suggested packages:
+
+      spell
+
+    The following NEW packages will be installed:
+
+      nano
+
+    0 upgraded, 1 newly installed, 0 to remove and 30 not upgraded.
+
+    Need to get 173 kB of archives.
+
+    (Output) NOTE: Package installation will proceed with more output, this is the first 10 lines...
+
+    user@linuxacademy:~$ sudo apt-get remove --purge nano
+
+    (Output)
+
+    Reading package lists... Done
+
+    Building dependency tree
+
+    Reading state information... Done
+
+    The following packages will be REMOVED:
+
+      nano*
+
+    0 upgraded, 0 newly installed, 1 to remove and 30 not upgraded.
+
+    After this operation, 610 kB disk space will be freed.
+
+    Do you want to continue? [Y/n] y
+
+    (Output) NOTE: Package removal will continue with more output, this is the first 10 lines
+
+ 
+
+4.  Using the tool from Step #3, execute the command with the appropriate options to DOWNLOAD (but not install) the 'nano' package. Once downloaded, use the standard package management command as in Steps #1 and #2 to install the downloaded package.
+
+    user@linuxacademy:~$ sudo apt-get download nano
+
+    user@linuxacademy:~$ ls -al nano*
+
+    (Output) -rw-r--r-- 1 root root 172710 Jul 16  2014 nano_2.2.6-3_amd64.deb
+
+    user@linuxacademy:~$ sudo dpkg -i nano_2.2.6-3_amd64.deb
+
+    (Output)
+
+    Preparing to unpack nano_2.2.6-3_amd64.deb ...
+
+    Unpacking nano (2.2.6-3) ...
+
+    Setting up nano (2.2.6-3) ...
+
+    update-alternatives: using /bin/nano to provide /usr/bin/editor (editor) in auto mode
+
+    update-alternatives: using /bin/nano to provide /usr/bin/pico (pico) in auto mode
+
+    Processing triggers for install-info (5.2.0.dfsg.1-6) ...
+
+    Processing triggers for doc-base (0.10.6) ...
+
+    Processing 2 added doc-base files...
+
+    Registering documents with scrollkeeper...
+
+    Processing triggers for man-db (2.7.0.2-5) ...
+
+    (Output) NOTE: Your version and output may differ depending on the distribution and version used
+
+ 
+
+ 5. Using the advanced package tool (from Steps #3 and #4), completely remove the 'nano' package. Use the appropriate options to remove the package and all configuration files that may have been added or changed.
+
+    user@linuxacademy:~$ sudo apt-get remove --purge nano
+
+    (Output)
+
+    The following packages will be REMOVED:
+
+      nano*
+
+    0 upgraded, 0 newly installed, 1 to remove and 30 not upgraded.
+
+    After this operation, 610 kB disk space will be freed.
+
+    Do you want to continue? [Y/n] y
+
+    (Output) NOTE: Your output will continue, these are just the initial lines to expect
+
+ 
+
+6. Clean up your workspace by issuing the appropriate options to the advanced configuration tool (will remove downloaded package files).
+
+    user@linuxacademy:~$ sudo apt-get clean
+
+    (Output) No output unless there are errors
