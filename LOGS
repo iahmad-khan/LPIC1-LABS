@@ -1,0 +1,82 @@
+1. Become the root user on your system. Using the appropriate command, display the results of the last time the server was booted (this utility reads from the system log and is updated on system boot).
+
+ 
+
+    su -
+
+    Password:
+
+    dmesg
+
+    [    0.000000] Initializing cgroup subsys cpuset
+    [    0.000000] Initializing cgroup subsys cpu
+    [    0.000000] Initializing cgroup subsys cpuacct
+    [    0.000000] Linux version 3.10.0-229.14.1.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.3 20140911 (Red Hat 4.8.3-9) (GCC) ) #1 SMP Tue Sep 15 15:05:51 UTC 2015
+    [    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz-3.10.0-229.14.1.el7.x86_64 root=UUID=0f790447-ebef-4ca0-b229-d0aa1985d57f ro console=ttyS0,115200 console=tty0 console=ttyS0,115200n8 vconsole.font=latarcyrheb-sun16 crashkernel=auto vconsole.keymap=us LANG=en_US.UTF-8
+    [    0.000000] e820: BIOS-provided physical RAM map:
+    [    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009dfff] usable
+    [    0.000000] BIOS-e820: [mem 0x000000000009e000-0x000000000009ffff] reserved
+    [    0.000000] BIOS-e820: [mem 0x00000000000e0000-0x00000000000fffff] reserved
+    [    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000003fffffff] usable
+    [    0.000000] BIOS-e820: [mem 0x00000000fc000000-0x00000000ffffffff] reserved
+
+    (ONLY FIRST 15 LINES PRESENTED - YOUR OUTPUT WILL BE MUCH LONGER)
+
+ 
+
+2.  Find and display the contents of the system log. Do the contents of the system log match the contents of the displayed information in Step #1?
+
+ 
+
+    cat /var/log/messages | grep "Sept 22"
+
+    Sep 22 19:32:24 tcox5 rsyslogd: [origin software="rsyslogd" swVersion="7.4.7" x-pid="580" x-info="http://www.rsyslog.com"] start
+    Sep 22 19:32:24 tcox5 rsyslogd-2307: warning: ~ action is deprecated, consider using the 'stop' statement instead [try http://www.rsyslog.com/e/2307 ]
+    Sep 22 19:32:21 tcox5 journal: Runtime journal is using 6.2M (max 49.6M, leaving 74.4M of free 489.8M, current limit 49.6M).
+    Sep 22 19:32:21 tcox5 kernel: Initializing cgroup subsys cpuset
+    Sep 22 19:32:21 tcox5 kernel: Initializing cgroup subsys cpu
+    Sep 22 19:32:21 tcox5 kernel: Initializing cgroup subsys cpuacct
+    Sep 22 19:32:21 tcox5 kernel: Linux version 3.10.0-229.14.1.el7.x86_64 (builder@kbuilder.dev.centos.org) (gcc version 4.8.3 20140911 (Red Hat 4.8.3-9) (GCC) ) #1 SMP Tue Sep 15 15:05:51 UTC 2015
+    Sep 22 19:32:21 tcox5 kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-3.10.0-229.14.1.el7.x86_64 root=UUID=0f790447-ebef-4ca0-b229-d0aa1985d57f ro console=ttyS0,115200 console=tty0 console=ttyS0,115200n8 vconsole.font=latarcyrheb-sun16 crashkernel=auto vconsole.keymap=us LANG=en_US.UTF-8
+    Sep 22 19:32:21 tcox5 kernel: e820: BIOS-provided physical RAM map:
+    Sep 22 19:32:21 tcox5 kernel: BIOS-e820: [mem 0x0000000000000000-0x000000000009dfff] usable
+    Sep 22 19:32:21 tcox5 kernel: BIOS-e820: [mem 0x000000000009e000-0x000000000009ffff] reserved
+
+    (NOTE: YOUR DISPLAYED INFORMATION WILL CONTAIN ALL MESSAGES SINCE LAST LOG ROTATION)
+
+    ANSWER: Yes it contains the same information but also much more...
+
+ 
+
+3.  Display the system user security activity log and show all security actions taken by the root user since log in during this session.
+
+ 
+
+    cat /var/log/secure | grep root
+
+    Sep 21 15:10:48 tcox5 sshd[2120]: pam_succeed_if(sshd:auth): requirement "uid >= 1000" not met by user "root"
+    Sep 21 21:32:19 tcox5 su: pam_unix(su-l:session): session opened for user root by user(uid=1001)
+    Sep 21 22:31:02 tcox5 su: pam_unix(su-l:session): session closed for user root
+    Sep 22 19:32:42 tcox5 su: pam_unix(su-l:session): session opened for user root by user(uid=1001) 
+
+ 
+
+4.  In a terminal, display and follow the security log from Step #3 above. Open another tab/terminal and starting as the user user, become the root user and then display the contents of the log now showing in the other tab/terminal.
+
+ 
+
+    tail -f /var/log/secure
+
+    Sep 22 19:32:29 tcox5 sshd[940]: Server listening on :: port 22.
+    Sep 22 19:32:32 tcox5 runuser: pam_unix(runuser-l:session): session closed for user user
+    Sep 22 19:32:33 tcox5 polkitd[1111]: Loading rules from directory /etc/polkit-1/rules.d
+    Sep 22 19:32:33 tcox5 polkitd[1111]: Loading rules from directory /usr/share/polkit-1/rules.d
+    Sep 22 19:32:33 tcox5 polkitd[1111]: Finished loading, compiling and executing 3 rules
+    Sep 22 19:32:33 tcox5 polkitd[1111]: Acquired the name org.freedesktop.PolicyKit1 on the system bus
+    Sep 22 19:32:35 tcox5 sshd[1048]: Accepted password for user from 216.46.60.98 port 50324 ssh2
+    Sep 22 19:32:35 tcox5 sshd[1048]: pam_unix(sshd:session): session opened for user user by (uid=0)
+    Sep 22 19:32:42 tcox5 su: pam_unix(su-l:session): session opened for user root by user(uid=1001)
+    Sep 22 19:33:00 tcox5 polkitd[1111]: Registered Authentication Agent for unix-session:c1 (system bus name :1.22 [/usr/bin/gnome-shell], object path /org/freedesktop/PolicyKit1/AuthenticationAgent, locale en_US.UTF-8)
+    Sep 22 19:41:32 tcox5 sshd[1451]: Accepted password for user from 216.46.60.98 port 50374 ssh2
+    Sep 22 19:41:32 tcox5 sshd[1451]: pam_unix(sshd:session): session opened for user user by (uid=0)
+    Sep 22 19:41:36 tcox5 su: pam_unix(su-l:session): session opened for user root by user(uid=1001)
