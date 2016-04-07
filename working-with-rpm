@@ -1,0 +1,34 @@
+1. Create and launch a CentOS distribution image in your server lab section.
+
+2. Download the Lynx RPM using yumdownloader to root's home directory.
+
+[root@localhost]# yumdownloader lynx
+
+3. Determine if the package already exists on the system.
+
+[root@localhost]# rpm -q lynx (if exists, will show somethign like; lynx-2.8.6-27.el6.x86_64)
+
+4. Install the package on the system using RPM and the required flags.
+
+[root@localhost]# rpm -i lynx-2.xxx.rpm
+
+5. Use RPM to list all the files inside of the RPM package. 
+
+[root@localhost]#  rpm -qpl lynx-2.xxx.rpm
+
+6. Remove the package from the system.
+
+[root@localhost]#  rpm -e lynx-2.xxx.rpm
+
+7. Attempt the same install using 'yum' rather than 'rpm'.
+
+[root@localhost]#  yum install lynx
+
+8. Remove the package using yum.
+
+[root@localhost]#  yum remove lynx (when you remove a package it is considered "erasing" you can also use "yum erase lynx" to remove the package)
+
+
+Assess Your Work: Working With RPM
+Please Start a new Lab Server and Refresh this page in order to assess your work.
+
