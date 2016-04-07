@@ -1,0 +1,33 @@
+Video One - apt-get Command Set
+
+1. Find the 'sources.list' file on your distribution. Edit the file to contain a mirror to the UK repository:
+
+deb http://ftp.uk.debian.org/debian wheezy-updates main contrib non-free
+deb-src http://ftp.uk.debian.org/debian wheezy-updates main contrib non-free
+
+Copy the sources.list file into your home directory, create a directory called 'coursethree' and place the file and all output files for this set of videos there.
+
+    Make sure you are running the "debian" distribution in the server lab
+    Add the source files to the end of the /etc/apt/sources.list file
+    apt-get update
+    mkdir ~/coursethree && cp /etc/apt/sources.list ~/coursethree
+
+After executing a repository update, complete a upgrade to your existing packages.
+
+    apt-get upgrade
+
+2. Obtain a count of the packages that are needed to install a full apache2 install (package name 'apache2'). Simulate the full installation, with the appropriate switch for logging, pipe the output to ~/file.out and then place the file in the directory above.
+
+    sudo apt-cache showpkg apache2 >> file.out
+    sudo apt-get install -s apache2 >> file.out (output will show you the names and number of total packages and dependencies needing to be installed)
+
+ 
+
+Video Two - DPKG Command Set
+
+1. Obtain a package from any third party site (recommendations - dropbox) in .DEB format. Download using 'wget' from the command line.
+
+2. Install the package you downloaded above, using dpkg with the appropriate command line options.  Resolve any missing dependencies using the associated 'apt-get' command, also pasting that command and resulting output in a file.
+
+    dpkg -i nano_2.2.6-1+b1_amd64.deb
+    apt-get -f upgrade (if there are dependency issues)
