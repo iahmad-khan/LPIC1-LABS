@@ -1,0 +1,95 @@
+1. Once logged into your system as a regular user, execute the command that will allow you to log into the root account.
+
+ 
+
+    su -
+    Password:
+    Last login: Wed Sep 16 14:17:13 UTC 2015 on pts/0
+
+ 
+
+2. As the root user, create a user called testuser. Be sure that the home directory of /home/testuser is created during user creation. Follow up by setting a password for this account.
+
+ 
+
+    adduser -d /home/testuser -m testuser
+    ls -al /home
+
+    total 8
+    drwxr-xr-x.  4 root     root       32 Sep 16 14:29 .
+    drwxr-xr-x. 17 root     root     4096 Aug  6 19:28 ..
+    drwx------.  2 testuser testuser   59 Sep 16 14:29 testuser
+    drwx------. 11 user     user     4096 Sep 16 14:27 user
+
+    passwd testuser
+
+    Changing password for user testuser.
+    New password:
+    Retype new password:
+    passwd: all authentication tokens updated successfully.
+
+ 
+
+3. Exit the root account, run the command to log in as the newly created user. Using the sudo command, attempt to edit the /etc/sudoers file and note the results.
+
+ 
+
+    su - testuser
+
+    Password:
+
+    sudo visudo /etc/sudoers
+
+    We trust you have received the usual lecture from the local System
+    Administrator. It usually boils down to these three things: 
+
+        #1) Respect the privacy of others.
+        #2) Think before you type.
+        #3) With great power comes great responsibility.
+
+    [sudo] password for testuser:
+
+    testuser is not in the sudoers file.  This incident will be reported.
+
+ 
+
+4. Execute the command that will allow you to log back into the root account. Once root, edit the /etc/sudoers file. Be sure that any member of the wheel group is granted sudo privileges. Save and exit the file.
+
+ 
+
+    su -
+
+    Password:
+    Last login: Wed Sep 16 14:27:33 UTC 2015 on pts/0
+
+    visudo
+
+    visudo: /etc/sudoers.tmp unchanged
+
+    cat /etc/sudoers | grep wheel
+
+    ## Allows people in group wheel to run all commands
+    %wheel  ALL=(ALL)       ALL
+    # %wheel        ALL=(ALL)       NOPASSWD: ALL
+
+ 
+
+5. Add the testuser to the wheel group in the appropriate file. Exit the root user. Log back into the system as the testuser user. Again, attempt to edit the /etc/sudoers file using the sudo command and note the results.
+
+ 
+
+    vim /etc/group
+    cat /etc/group | grep wheel
+
+    wheel:x:10:centos,testuser
+
+    exit
+
+    sudo visudo
+
+    [sudo] password for testuser:
+    visudo: /etc/sudoers.tmp unchanged
+
+ 
+Assess Your Work: Root User, Sudo Users And Setting Up Your User Account
+Please Start a new Lab Server and Refresh this page in order to assess your work.
