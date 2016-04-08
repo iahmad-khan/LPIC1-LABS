@@ -1,0 +1,64 @@
+LAB ONE
+
+1.  Find the log file, that corresponds to the output of the command dmesg and copy it into an output file named 'file.out'
+in user's home directory.
+
+sudo cat /var/log/syslog >> /home/user/file.out
+sudo cat /var/log/dmesg >> /home/user/file.out
+
+NOTE: In some distributions the location of the log file that dmesg uses is the syslog and in others it is the /var/log/dmesg.
+
+2. Write a command that obtains the PID of any process owned by 'user'. Use that PID to look up the current envrionment variables of the process as listed in one of the special directories in this lesson.
+
+ps aux | grep processname
+sudo cat /proc/PID/environ >> file.out
+
+
+3. From a command line, list all currently enabled modules on the system. Determine if your system has a module enabled for the network filesystem. If yes, what is the name?
+
+lsmod >> file.out
+lsmod | grep nfs
+lsmod | grep nfs >> file.out
+
+4. Use the lspci command to list all the devices on your system, in verbose mode and containing all IRQ or address information.
+
+lspci -v -x
+
+5. Use the default pci.ids file for vendor/device ID lookups and create your own version. Rewrite some of the information in 
+that new file, passing it into the lspci command and display the output.
+
+cp /usr/share/hwdata/pci.ids /home/username/my.ids
+lspci -x -i /home/username/my.ids | grep MODULECHANGED
+
+LAB TWO
+
+1. Using some of the commands we have learned thus far, find a filesystem module that is LOADED but you know is NOT in use. 
+Identify its module name below:
+
+lsmod | grep "0 $"
+  
+NOTE: We can use grep to search for a 0 and a space at the end of the line, signifying that a module is not in use
+
+lsmod | grep "0 $" | grep fs
+
+NOTE: We can use grep again to look for lines that have "fs" in them.
+
+
+echo isofs >> file.out
+
+2. Now unload that module and verify it is no longer loaded in the kernel. List the steps to unload the module and how
+you verified it was no longer loaded.
+
+sudo modprobe -r (or --remove or rmmod) isofs
+lsmod | grep isofs
+
+3. Without using modprobe, reload and verify that recently removed module. List the steps to load the module and how you 
+verified it was now loaded.
+
+sudo insmod /usr/lib/modules/`uname -r`/kernel/fs/isofs/isofs.ko
+
+lsmod | grep isofs
+
+NOTE: `uname -r` is a handy shortcut to lookup the version number of the kernel and insert it into the path. 
+If you know the correct path already, you might not need the shortcut, but it also serves as a
+failsafe to make sure you have the correct location.
