@@ -1,0 +1,191 @@
+1. Make a directory in root's home directory called 'tmp'. Change to that directory. List the contents of the /etc directory such that it displays on the console AND creates a file called 'sysdirs' at the same time.
+
+    root@tcox1:~# mkdir tmp
+
+    root@tcox1:~# cd tmp
+
+    root@tcox1:~/tmp# ls -al /etc | tee sysdirs
+
+    total 1064
+
+    drwxr-xr-x 126 root root   12288 Sep 28 17:36 .
+
+    drwxr-xr-x  23 root root    4096 Sep 28 17:35 ..
+
+    drwxr-xr-x   3 root root    4096 Sep 27  2014 acpi
+
+    -rw-r--r--   1 root root    2981 Sep 27  2014 adduser.conf
+
+    -rw-r--r--   1 root root      10 Sep 27  2014 adjtime
+
+    drwxr-xr-x   2 root root    4096 Aug 26 15:49 alternatives
+
+    drwxr-xr-x   8 root root    4096 Sep 28 17:35 apache2
+
+    -rw-r--r--   1 root root     112 Jan 10  2014 apg.conf
+
+    drwxr-xr-x   3 root root    4096 Sep 27  2014 apm
+
+    drwxr-xr-x   3 root root    4096 Aug 15 14:54 apparmor
+
+    drwxr-xr-x   8 root root    4096 Sep 28 17:35 apparmor.d
+
+    drwxr-xr-x   5 root root    4096 Sep 28 17:35 apport
+
+    drwxr-xr-x   6 root root    4096 Sep 10 18:44 apt
+
+    -rw-r-----   1 root daemon   144 Oct 21  2013 at.deny
+
+    (NOTE OUTPUT CONCATENATED FOR SPACE)
+
+    root@tcox1:~/tmp# ll
+
+    total 24
+
+    drwxr-xr-x 2 root root  4096 Sep 28 18:06 ./
+
+    drwx------ 8 root root  4096 Sep 28 18:06 ../
+
+    -rw-r--r-- 1 root root 12809 Sep 28 18:06 sysdirs
+
+ 
+
+2. Using the 'tee' command, list the contents of the '/var' directory and make sure those are appended to the 'sysdirs' file from Step #1.
+
+    root@tcox1:~/tmp# ls -al /var | tee -a sysdirs
+
+    total 52
+
+    drwxr-xr-x 13 root root   4096 Aug 22 23:21 .
+
+    drwxr-xr-x 23 root root   4096 Sep 28 17:35 ..
+
+    drwxr-xr-x  2 root root   4096 Apr 10  2014 backups
+
+    drwxr-xr-x 17 root root   4096 Sep  7 15:55 cache
+
+    drwxrwxrwt  2 root root   4096 Aug  6 15:31 crash
+
+    drwxr-xr-x 57 root root   4096 Sep  7 15:55 lib
+
+    drwxrwsr-x  2 root staff  4096 Apr 10  2014 local
+
+    lrwxrwxrwx  1 root root      9 Sep 27  2014 lock -> /run/lock
+
+    drwxrwxr-x 12 root syslog 4096 Sep 28 17:35 log
+
+    drwxrwsr-x  2 root mail   4096 Sep 27  2014 mail
+
+    drwxr-xr-x  2 root root   4096 Sep 27  2014 opt
+
+    lrwxrwxrwx  1 root root      4 Sep 27  2014 run -> /run
+
+    drwxr-xr-x  7 root root   4096 Aug  6 15:52 spool
+
+    drwxrwxrwt  2 root root   4096 Sep 28 17:36 tmp
+
+    drwxr-xr-x  3 root root   4096 Aug 22 23:21 www
+
+    root@tcox1:~/tmp# ll
+
+    total 24
+
+    drwxr-xr-x 2 root root  4096 Sep 28 18:06 ./
+
+    drwx------ 8 root root  4096 Sep 28 18:06 ../
+
+    -rw-r--r-- 1 root root 13570 Sep 28 18:08 sysdirs
+
+ 
+
+3. List the contents of the '/var/log' directory and making sure that the 'tee' command is used to create three copies of it called 'copy1', 'copy2' and 'copy3' in the same command.
+
+    root@tcox1:~/tmp# ls -al /var/log | tee copy1 copy2 copy3
+
+    total 52
+
+    drwxr-xr-x 13 root root   4096 Aug 22 23:21 .
+
+    drwxr-xr-x 23 root root   4096 Sep 28 17:35 ..
+
+    drwxr-xr-x  2 root root   4096 Apr 10  2014 backups
+
+    drwxr-xr-x 17 root root   4096 Sep  7 15:55 cache
+
+    drwxrwxrwt  2 root root   4096 Aug  6 15:31 crash
+
+    drwxr-xr-x 57 root root   4096 Sep  7 15:55 lib
+
+    drwxrwsr-x  2 root staff  4096 Apr 10  2014 local
+
+    lrwxrwxrwx  1 root root      9 Sep 27  2014 lock -> /run/lock
+
+    drwxrwxr-x 12 root syslog 4096 Sep 28 17:35 log
+
+    drwxrwsr-x  2 root mail   4096 Sep 27  2014 mail
+
+    drwxr-xr-x  2 root root   4096 Sep 27  2014 opt
+
+    lrwxrwxrwx  1 root root      4 Sep 27  2014 run -> /run
+
+    drwxr-xr-x  7 root root   4096 Aug  6 15:52 spool
+
+    drwxrwxrwt  2 root root   4096 Sep 28 17:36 tmp
+
+    drwxr-xr-x  3 root root   4096 Aug 22 23:21 www
+
+    root@tcox1:~/tmp# ll
+
+    total 36
+
+    drwxr-xr-x 2 root root  4096 Sep 28 18:08 ./
+
+    drwx------ 8 root root  4096 Sep 28 18:06 ../
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy1
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy2
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy3
+
+    -rw-r--r-- 1 root root 13570 Sep 28 18:08 sysdirs
+
+ 
+
+4. Display the directory structure we have just created in 'tmp' and use 'tee' to write that to a file called 'final.exercise' at the same time. 
+
+    root@tcox1:~/tmp# ls -al | tee final.exercise
+
+    total 36
+
+    drwxr-xr-x 2 root root  4096 Sep 28 18:19 .
+
+    drwx------ 8 root root  4096 Sep 28 18:06 ..
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy1
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy2
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy3
+
+    -rw-r--r-- 1 root root     0 Sep 28 18:19 final.exercise
+
+    -rw-r--r-- 1 root root 13570 Sep 28 18:08 sysdirs
+
+    root@tcox1:~/tmp# cat final.exercise
+
+    total 36
+
+    drwxr-xr-x 2 root root  4096 Sep 28 18:19 .
+
+    drwx------ 8 root root  4096 Sep 28 18:06 ..
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy1
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy2
+
+    -rw-r--r-- 1 root root   761 Sep 28 18:08 copy3
+
+    -rw-r--r-- 1 root root     0 Sep 28 18:19 final.exercise
+
+    -rw-r--r-- 1 root root 13570 Sep 28 18:08 sysdirs
