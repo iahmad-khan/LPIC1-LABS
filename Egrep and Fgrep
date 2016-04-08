@@ -1,0 +1,141 @@
+1. Logged in as user, obtain a full listing of all processes running on the system and filter the results so that only processes that contain the keyword 'ssh' are included in the output results.
+
+    [user@tcox3 redirection]$ ps aux | grep ssh
+
+    root       621  0.0  0.0  82508  3600 ?        Ss   09:56   0:00 /usr/sbin/sshd -D
+
+    user      2452  0.0  0.0  52836   576 ?        Ss   09:56   0:00 /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "env GNOME_SHELL_SESSION_MODE=classic gnome-session --session gnome-classic"
+
+    user      3190  0.0  0.0 112640   960 pts/0    R+   10:08   0:00 grep --color=auto ssh
+
+ 
+
+2. Noticing that the actual command run to display those processes is one of the results, rerun the command from Step #1, but pipe it to another command to filter out the grep command itself.
+
+    [user@tcox3 redirection]$ ps aux | grep ssh | grep -v grep
+
+    root       621  0.0  0.0  82508  3600 ?        Ss   09:56   0:00 /usr/sbin/sshd -D
+
+    user      2452  0.0  0.0  52836   576 ?        Ss   09:56   0:00 /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "env GNOME_SHELL_SESSION_MODE=classic gnome-session --session gnome-classic"
+
+ 
+
+3. Run a command to list all processes, piping the results in order to display only processes that have a '[' (open square bracket character). You want to save cpu cycles so make sure you are not using a regular expression.
+
+[user@tcox3 redirection]$ ps aux | fgrep [
+
+root         2  0.0  0.0      0     0 ?        S    12:07   0:00 [kthreadd]
+
+root         3  0.0  0.0      0     0 ?        S    12:07   0:00 [ksoftirqd/0]
+
+root         5  0.0  0.0      0     0 ?        S<   12:07   0:00 [kworker/0:0H]
+
+root         6  0.0  0.0      0     0 ?        S    12:07   0:00 [kworker/u30:0]
+
+root         7  0.0  0.0      0     0 ?        S    12:07   0:00 [migration/0]
+
+root         8  0.0  0.0      0     0 ?        S    12:07   0:00 [rcu_bh]
+
+root         9  0.0  0.0      0     0 ?        S    12:07   0:00 [rcuob/0]
+
+root        10  0.0  0.0      0     0 ?        S    12:07   0:00 [rcuob/1]
+
+root        11  0.0  0.0      0     0 ?        S    12:07   0:00 [rcuob/2]
+
+root        12  0.0  0.0      0     0 ?        S    12:07   0:00 [rcuob/3]
+
+...
+
+ 
+
+ 
+
+4. Once again, run a command listing all processes, but use a command that allows extended regular expressions to display all processes running that contain two consecutive 's' characters in them. 
+
+    [user@tcox3 redirection]$ ps aux | egrep ss
+
+    dbus       492  0.0  0.0  29764  2840 ?        Ss   09:56   0:00 /bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+
+    root       621  0.0  0.0  82508  3600 ?        Ss   09:56   0:00 /usr/sbin/sshd -D
+
+    root      2259  0.0  0.1 373980  5468 ?        Sl   09:56   0:00 gdm-session-worker [pam/gdm-password]
+
+    user      2267  0.0  0.3 860364 13240 ?        Ssl  09:56   0:00 gnome-session --session gnome-classic
+
+    user      2275  0.0  0.0  13944   608 ?        S    09:56   0:00 dbus-launch --sh-syntax --exit-with-session
+
+    user      2276  0.0  0.0  29732  1788 ?        Ss   09:56   0:00 /bin/dbus-daemon --fork --print-pid 4 --print-address 6 --session
+
+    user      2436  0.0  0.0 143760   284 ?        S    09:56   0:00 /usr/bin/VBoxClient --seamless
+
+    user      2437  0.0  0.0 209960  1036 ?        Sl   09:56   0:00 /usr/bin/VBoxClient --seamless
+
+    user      2452  0.0  0.0  52836   576 ?        Ss   09:56   0:00 /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "env GNOME_SHELL_SESSION_MODE=classic gnome-session --session gnome-classic"
+
+    user      2471  0.0  0.0  28644  1568 ?        S    09:56   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+
+    user      2475  0.0  0.0 129656  3340 ?        Sl   09:56   0:00 /usr/libexec/at-spi2-registryd --use-gnome-session
+
+    user      2707  0.0  0.3 893084 12992 ?        Sl   09:56   0:00 /usr/libexec/evolution-addressbook-factory
+
+    user      3248  0.0  0.0 112640   960 pts/0    R+   10:11   0:00 grep -E --color=auto ss
+
+ 
+
+5. Try the other two methods of obtaining the same results in Step #3.
+
+     [user@tcox3 redirection]$ ps aux | egrep s{2}
+
+    dbus       492  0.0  0.0  29764  2840 ?        Ss   09:56   0:00 /bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+
+    root       621  0.0  0.0  82508  3600 ?        Ss   09:56   0:00 /usr/sbin/sshd -D
+
+    root      2259  0.0  0.1 373980  5468 ?        Sl   09:56   0:00 gdm-session-worker [pam/gdm-password]
+
+    user      2267  0.0  0.3 860364 13240 ?        Ssl  09:56   0:00 gnome-session --session gnome-classic
+
+    user      2275  0.0  0.0  13944   608 ?        S    09:56   0:00 dbus-launch --sh-syntax --exit-with-session
+
+    user      2276  0.0  0.0  29732  1788 ?        Ss   09:56   0:00 /bin/dbus-daemon --fork --print-pid 4 --print-address 6 --session
+
+    user      2436  0.0  0.0 143760   284 ?        S    09:56   0:00 /usr/bin/VBoxClient --seamless
+
+    user      2437  0.0  0.0 209960  1036 ?        Sl   09:56   0:00 /usr/bin/VBoxClient --seamless
+
+    user      2452  0.0  0.0  52836   576 ?        Ss   09:56   0:00 /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "env GNOME_SHELL_SESSION_MODE=classic gnome-session --session gnome-classic"
+
+    user      2471  0.0  0.0  28644  1568 ?        S    09:56   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+
+    user      2475  0.0  0.0 129656  3340 ?        Sl   09:56   0:00 /usr/libexec/at-spi2-registryd --use-gnome-session
+
+    user      2707  0.0  0.3 893084 12992 ?        Sl   09:56   0:00 /usr/libexec/evolution-addressbook-factory
+
+    user      3248  0.0  0.0 112640   960 pts/0    R+   10:11   0:00 grep -E --color=auto ss
+
+    [user@tcox3 redirection]$ ps aux | grep -E ss
+
+    dbus       492  0.0  0.0  29764  2840 ?        Ss   09:56   0:00 /bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+
+    root       621  0.0  0.0  82508  3600 ?        Ss   09:56   0:00 /usr/sbin/sshd -D
+
+    root      2259  0.0  0.1 373980  5468 ?        Sl   09:56   0:00 gdm-session-worker [pam/gdm-password]
+
+    user      2267  0.0  0.3 860364 13240 ?        Ssl  09:56   0:00 gnome-session --session gnome-classic
+
+    user      2275  0.0  0.0  13944   608 ?        S    09:56   0:00 dbus-launch --sh-syntax --exit-with-session
+
+    user      2276  0.0  0.0  29732  1788 ?        Ss   09:56   0:00 /bin/dbus-daemon --fork --print-pid 4 --print-address 6 --session
+
+    user      2436  0.0  0.0 143760   284 ?        S    09:56   0:00 /usr/bin/VBoxClient --seamless
+
+    user      2437  0.0  0.0 209960  1036 ?        Sl   09:56   0:00 /usr/bin/VBoxClient --seamless
+
+    user      2452  0.0  0.0  52836   576 ?        Ss   09:56   0:00 /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "env GNOME_SHELL_SESSION_MODE=classic gnome-session --session gnome-classic"
+
+    user      2471  0.0  0.0  28644  1568 ?        S    09:56   0:00 /bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+
+    user      2475  0.0  0.0 129656  3340 ?        Sl   09:56   0:00 /usr/libexec/at-spi2-registryd --use-gnome-session
+
+    user      2707  0.0  0.3 893084 12992 ?        Sl   09:56   0:00 /usr/libexec/evolution-addressbook-factory
+
+    user      3248  0.0  0.0 112640   960 pts/0    R+   10:11   0:00 grep -E --color=auto ss
