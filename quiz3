@@ -1,0 +1,36 @@
+
+
+1) The /proc/interrupts file is used to check IRQs being used on the system.
+
+Correct
+Correct answer
+
+True
+
+2) Which command will allow you to see the status of modules in the Linux Kernel?
+
+Correct
+Correct answer
+
+lsmod
+
+3) The grub configuration file is located at:
+
+Correct
+Correct answer
+
+/boot/grub/menu.lst
+
+4) What information is contained in the /proc/dma file?
+
+Correct
+Correct answer
+
+which dma channels are currently in use by the system
+
+5) The lspci command can display details about all of the following except for:
+
+Correct
+Correct answer
+
+Ethernet card MAC addresses
