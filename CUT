@@ -1,0 +1,87 @@
+1. Create a file called 'test.txt' in /root/tmp containing at least five sentences of varying lengths, each sentence on its own line. List the file.
+
+    root@tcox1:~/tmp# vim test.txt
+
+    root@tcox1:~/tmp# cat test.txt
+
+    Now is the time for all good men to come to the aid of their country
+
+    Sally Sell Sea Shells by the Sea Shore
+
+    How Many Would a Wood Chuck Chuck if a Wood Chuck Could Chuck Wood
+
+    Lorem Ipsum Salt
+
+    HULK SMASH!
+
+ 
+
+2. Using the 'cut' command, display only those letters in the 2nd column of that file.
+
+    root@tcox1:~/tmp# cut -c2 test.txt
+
+    o
+
+    a
+
+    o
+
+    o
+
+    U
+
+ 
+
+3. With the appropriate options, display the 3rd through 6th characters of each line (range).
+
+    root@tcox1:~/tmp# cut -c3-6 test.txt
+
+    w is
+
+    lly
+
+    w Ma
+
+    rem
+
+    LK S
+
+     
+
+4. Extract and display JUST the first eight characters from the beginning of each line.
+
+    root@tcox1:~/tmp# cut -c-8 test.txt
+
+    Now is t
+
+    Sally Se
+
+    How Many
+
+    Lorem Ip
+
+    HULK SMA
+
+ 
+
+5. Using the '/etc/passwd' file, display only the first full field value (username) of each line by indicating which column to cut and identifying the field delimiter in the file.
+
+    root@tcox1:~/tmp# cut -d':' -f1 /etc/passwd
+
+    root
+
+    daemon
+
+    bin
+
+    sys
+
+    sync
+
+    games
+
+    man
+
+    lp
+
+    (NOTE: YOUR OUTPUT MAY DIFFER)
