@@ -1,0 +1,27 @@
+Lab One
+
+    Create a file called MyLab.out. Append the currently running processes (including process IDs) on the system to that file.
+    Using the appropriate process command, obtain the number of running processes on the system and append that value to your file created above.
+    Display the top command on your terminal but add the appropriate command parameter that will cause it to update 10 times and then exit.
+
+ 
+
+ps aux > MyLab.out
+ps aux | wc -l >> MyLab.out
+top -n 10
+
+Lab Two
+
+    Create a directory (in your home directory) called mylibrary. Change the rights on that new directory so that everyone has read and execute access
+    Add that directory to the system wide library path /etc/ld.so.conf and save the file
+    Execute the command that will cause the system library path to update, now containing your new directory in its search path
+    Append the contents of your new ld.so.conf file to the MyLab.out file created in Lab One
+    Append the environment variable for your user called LD_LIBRARY_PATH to that same file
+    Finally, append the system type, kernel version, hostname and Linux distribution type to the file above using the appropriate command and parameter(s)
+
+cd ~ && mkdir mylibrary && chmod 755 mylibrary -R
+sudo vi /etc/ld.so.conf (add line "/home/username/mylibrary" and save/exit)
+sudo ldconfig
+sudo cat /etc/ld.so.conf >> MyLab.out
+echo $LD_LIBRARY_PATH >> MyLab.out
+uname -a >> MyLab.out
