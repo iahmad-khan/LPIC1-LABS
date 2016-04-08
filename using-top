@@ -1,0 +1,191 @@
+1. Using the 'top' command, display the current processes on the system to the console and exit the program.
+
+    user@tcox1:~$ top
+
+    top - 16:50:32 up 10 min,  2 users,  load average: 0.00, 0.05, 0.06
+
+    Tasks: 131 total,   1 running, 130 sleeping,   0 stopped,   0 zombie
+
+    %Cpu(s):  3.3 us,  1.2 sy,  0.0 ni, 90.9 id,  0.8 wa,  0.0 hi,  0.0 si,  3.8 st
+
+    KiB Mem:   1016256 total,   677492 used,   338764 free,    30180 buffers
+
+    KiB Swap:        0 total,        0 used,        0 free.   407284 cached Mem
+
+     
+
+      PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+
+        1 root      20   0   33740   3088   1500 S  0.0  0.3   0:01.32 init
+
+        2 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kthreadd
+
+        3 root      20   0       0      0      0 S  0.0  0.0   0:00.00 ksoftirqd/0
+
+        5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:0H
+
+        6 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kworker/u30:0
+
+        7 root      20   0       0      0      0 S  0.0  0.0   0:00.13 rcu_sched
+
+     
+
+2. Using the 'top' command with the appropriate option, list ONLY the current processes running as the user id 'user'.
+
+    user@tcox1:~$ top -u user
+
+    top - 16:52:12 up 12 min,  2 users,  load average: 0.00, 0.04, 0.05
+
+    Tasks: 131 total,   1 running, 130 sleeping,   0 stopped,   0 zombie
+
+    %Cpu(s):  2.9 us,  1.0 sy,  0.0 ni, 92.1 id,  0.7 wa,  0.0 hi,  0.0 si,  3.3 st
+
+    KiB Mem:   1016256 total,   677420 used,   338836 free,    30188 buffers
+
+    KiB Swap:        0 total,        0 used,        0 free.   407280 cached Mem
+
+     
+
+      PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+
+     4046 user      20   0  109784   2440   1400 S  0.0  0.2   0:00.00 sshd
+
+     4047 user      20   0   21496   3924   1740 S  0.0  0.4   0:00.04 bash
+
+     4116 user      20   0  109784   2032   1040 S  0.0  0.2   0:00.00 sshd
+
+     4117 user      20   0   12820    928    756 S  0.0  0.1   0:00.00 sftp-server
+
+     4122 user      20   0   23688   1604   1088 R  0.0  0.2   0:00.00 top
+
+ 
+
+3. Find the current Process ID of the bash shell your user is logged in as. Display JUST that PID in the top command in the console and then exit the program.
+
+    user@tcox1:~$ ps aux | grep bash
+
+    user      4047  0.0  0.3  21496  3924 pts/1    Ss   16:43   0:00 -bash
+
+    user      4124  0.0  0.0  10460   928 pts/1    S+   16:52   0:00 grep --color=auto bash
+
+    user@tcox1:~$ top -p 21496
+
+    top - 16:52:55 up 13 min,  2 users,  load average: 0.00, 0.03, 0.05
+
+    Tasks:   0 total,   0 running,   0 sleeping,   0 stopped,   0 zombie
+
+    %Cpu(s):  2.7 us,  1.0 sy,  0.0 ni, 92.5 id,  0.7 wa,  0.0 hi,  0.0 si,  3.1 st
+
+    KiB Mem:   1016256 total,   677408 used,   338848 free,    30196 buffers
+
+    KiB Swap:        0 total,        0 used,        0 free.   407372 cached Mem
+
+ 
+
+4. Using 'top' in batch mode, have it display the current processes for the user 'user' twice to the console and then stop.
+
+    user@tcox1:~$ top -u user -b -n 2
+
+    top - 16:55:02 up 15 min,  2 users,  load average: 0.00, 0.02, 0.05
+
+    Tasks: 131 total,   1 running, 130 sleeping,   0 stopped,   0 zombie
+
+    %Cpu(s):  2.4 us,  0.8 sy,  0.0 ni, 93.5 id,  0.6 wa,  0.0 hi,  0.0 si,  2.7 st
+
+    KiB Mem:   1016256 total,   677440 used,   338816 free,    30208 buffers
+
+    KiB Swap:        0 total,        0 used,        0 free.   407376 cached Mem
+
+     
+
+      PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+
+     4046 user      20   0  109784   2440   1400 S  0.0  0.2   0:00.01 sshd
+
+     4047 user      20   0   21496   3924   1740 S  0.0  0.4   0:00.04 bash
+
+     4116 user      20   0  109784   2032   1040 S  0.0  0.2   0:00.00 sshd
+
+     4117 user      20   0   12820    928    756 S  0.0  0.1   0:00.00 sftp-server
+
+     4127 user      20   0   23528   1460   1068 R  0.0  0.1   0:00.00 top
+
+     
+
+    top - 16:55:05 up 15 min,  2 users,  load average: 0.00, 0.02, 0.05
+
+    Tasks: 131 total,   1 running, 130 sleeping,   0 stopped,   0 zombie
+
+    %Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+
+    KiB Mem:   1016256 total,   677564 used,   338692 free,    30208 buffers
+
+    KiB Swap:        0 total,        0 used,        0 free.   407384 cached Mem
+
+     
+
+      PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+
+     4046 user      20   0  109784   2440   1400 S  0.0  0.2   0:00.01 sshd
+
+     4047 user      20   0   21496   3924   1740 S  0.0  0.4   0:00.04 bash
+
+     4116 user      20   0  109784   2032   1040 S  0.0  0.2   0:00.00 sshd
+
+     4117 user      20   0   12820    928    756 S  0.0  0.1   0:00.00 sftp-server
+
+     4127 user      20   0   23536   1588   1172 R  0.0  0.2   0:00.00 top
+
+ 
+
+5. Now that you have the PID of the bash shell for your login, use 'top' with the proper options to display ONLY that PID, in batch mode, repeating three times and redirected to a file called 'mybash.log' in your home directory. 
+
+    user@tcox1:~$ top -p 21496 -b -n 3 > mybash.log
+
+     
+
+6. Display the file created in Step #5.
+
+    user@tcox1:~$ cat mybash.log
+
+    top - 16:55:58 up 16 min,  2 users,  load average: 0.00, 0.02, 0.05
+
+    Tasks:   0 total,   0 running,   0 sleeping,   0 stopped,   0 zombie
+
+    %Cpu(s):  2.2 us,  0.8 sy,  0.0 ni, 93.9 id,  0.6 wa,  0.0 hi,  0.0 si,  2.5 st
+
+    KiB Mem:   1016256 total,   677588 used,   338668 free,    30216 buffers
+
+    KiB Swap:        0 total,        0 used,        0 free.   407384 cached Mem
+
+     
+
+      PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+
+     
+
+    top - 16:56:01 up 16 min,  2 users,  load average: 0.00, 0.02, 0.05
+
+    Tasks:   0 total,   0 running,   0 sleeping,   0 stopped,   0 zombie
+
+    %Cpu(s):  0.3 us,  0.0 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+
+    KiB Mem:   1016256 total,   677588 used,   338668 free,    30216 buffers
+
+    KiB Swap:        0 total,        0 used,        0 free.   407388 cached Mem
+
+     
+
+      PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+
+     
+
+    top - 16:56:04 up 16 min,  2 users,  load average: 0.00, 0.01, 0.05
+
+    Tasks:   0 total,   0 running,   0 sleeping,   0 stopped,   0 zombie
+
+    %Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+
+    KiB Mem:   1016256 total,   677588 used,   338668 free,    30224 buffers
+
+    KiB Swap:        0 total,        0 used,        0 free.   407388 cached Mem
