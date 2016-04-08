@@ -1,0 +1,109 @@
+1. Create a directory in your home directory called 'exercises' and change to that directory.
+
+    [root@tcox5 ~]# mkdir exercises && cd exercises
+
+ 
+
+2. Create a tar archive, with verbose output during creation, called 'etc.tar' containing all files and directories from '/etc'. 
+
+    [root@tcox5 exercises]# tar cvf etc.tar /etc
+
+    tar: Removing leading `/' from member names
+
+    /etc/
+
+    /etc/fonts/
+
+    /etc/fonts/conf.d/
+
+    /etc/fonts/conf.d/10-scale-bitmap-fonts.conf
+
+    /etc/fonts/conf.d/20-unhint-small-vera.conf
+
+    /etc/fonts/conf.d/25-no-bitmap-fedora.conf
+
+    /etc/fonts/conf.d/25-unhint-nonlatin.conf
+
+    /etc/fonts/conf.d/30-metric-aliases.conf
+
+    /etc/fonts/conf.d/30-urw-aliases.conf
+
+    /etc/fonts/conf.d/40-nonlatin.conf
+
+    (NOTE: Your output will be much larger, concatenated for space)
+
+ 
+
+3. Display the contents of the file created in Step #2 above and pipe that output to a file called 'dirlist.txt'. Add that file to the archive created in Step #2 above. Display and look for that file within the archive.
+
+    [root@tcox5 exercises]# tar tvf etc.tar > dirlist.txt
+
+    [root@tcox5 exercises]# tar rvf etc.tar dirlist.txt
+
+    dirlist.txt
+
+    [root@tcox5 exercises]# tar tvf etc.tar | grep dirlist
+
+    -rw-r--r-- root/root    120370 2015-09-29 19:16 dirlist.txt
+
+ 
+
+4. Create a new directory called 'verify' inside the 'exercises' directory and change to that directory. Restore the contents of the archive file from Step #2 above here and make sure the new directory listing file created in Step #3 is present.
+
+    [root@tcox5 exercises]# mkdir verify && cd verify
+
+    [root@tcox5 verify]# tar xvf ../etc.tar
+
+    etc/
+
+    etc/fonts/
+
+    etc/fonts/conf.d/
+
+    etc/fonts/conf.d/10-scale-bitmap-fonts.conf
+
+    etc/fonts/conf.d/20-unhint-small-vera.conf
+
+    etc/fonts/conf.d/25-no-bitmap-fedora.conf
+
+    etc/fonts/conf.d/25-unhint-nonlatin.conf
+
+    etc/fonts/conf.d/30-metric-aliases.conf
+
+    etc/fonts/conf.d/30-urw-aliases.conf
+
+    etc/fonts/conf.d/40-nonlatin.conf
+
+    etc/fonts/conf.d/45-latin.conf
+
+    etc/fonts/conf.d/49-sansserif.conf
+
+    (NOTE: Output concatenated for space)
+
+    [root@tcox5 verify]# ll
+
+    total 132
+
+    -rw-r--r--.  1 root root 120370 Sep 29 19:16 dirlist.txt
+
+    drwxr-xr-x. 98 root root   8192 Sep 29 18:43 etc
+
+ 
+
+5. Delete the 'dirlist.txt' from this directory. Using the appropriate command, from the archive file created in Step #2, extract ONLY the 'dirlist.txt' from the archive to this directory.
+
+    [root@tcox5 verify]# rm dirlist.txt
+
+    rm: remove regular file ‘dirlist.txt’? y
+
+    [root@tcox5 verify]# tar xvf ../etc.tar dirlist.txt
+
+    dirlist.txt
+
+    [root@tcox5 verify]# ll
+
+    total 132
+
+    -rw-r--r--.  1 root root 120370 Sep 29 19:16 dirlist.txt
+
+    drwxr-xr-x. 98 root root   8192 Sep 29 18:43 etc
