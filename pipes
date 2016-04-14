@@ -1,0 +1,27 @@
+Lab One
+
+    Copy the contents of /etc/passwd file into ~/myfile.txt.
+    Display into standard output only the user names in the file, the first column.
+    Count the number of lines/users that are in the file.
+    Count the number of words in the file.
+    Use the split command to generate a 256 byte suffix to the first file.
+    Show the differences in the two files using the appropriate command, pipe that command to ‘wc’ and obtain a count of the characters that are different.
+
+    cat /etc/passwd > myfile.txt
+    cut -f1 -d: myfile.txt
+    cat myfile.txt | wc -l
+    cat myfile.txt |wc -w
+    split -b 256 myfile.txt
+    diff xaa xab
+
+Lab Two
+
+    On the command line instruct the shell to read from the current input until "stop" is inputted.
+    Replace all instances of "root" in myfile.txt with "linuxroot" using sed the stream editor.
+    Using grep for all for all words that start with an r have two wild card characters following and end with t.
+    Grep all lines that have numbers between 5-9.
+
+    cat << stop - enter in any command three times then enter stop.
+    sed 's/root/linuxroot/g' myfile.txt (s is for replace and g means every occurrence [globally])
+    grep r..t myfile.txt
+    cat myfile.txt | grep [5-9]
