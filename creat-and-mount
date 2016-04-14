@@ -1,0 +1,253 @@
+1. Using the fdisk utility, check to be sure there is an available drive on your lab server with no partitions currently. If not, be sure to use the mount 'play' button on your lab server tab to create one.
+
+    root@tcox1:~# fdisk -l
+
+     
+
+    Disk /dev/xvda: 16.1 GB, 16106127360 bytes
+
+    255 heads, 63 sectors/track, 1958 cylinders, total 31457280 sectors
+
+    Units = sectors of 1 * 512 = 512 bytes
+
+    Sector size (logical/physical): 512 bytes / 512 bytes
+
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+    Disk identifier: 0x00000000
+
+     
+
+        Device Boot      Start         End      Blocks   Id  System
+
+    /dev/xvda1   *       16065    31455269    15719602+  83  Linux
+
+     
+
+    Disk /dev/xvdf: 1073 MB, 1073741824 bytes
+
+    255 heads, 63 sectors/track, 130 cylinders, total 2097152 sectors
+
+    Units = sectors of 1 * 512 = 512 bytes
+
+    Sector size (logical/physical): 512 bytes / 512 bytes
+
+    I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+    Disk identifier: 0x00000000
+
+     
+
+    Disk /dev/xvdf doesn't contain a valid partition table
+
+ 
+
+2.  Use the 'gdisk' utility to create a new Linux partition on the drive you find in Step #2 above. Print out the partition table and be sure to write it to disk before exiting 'gdisk'.
+
+    root@tcox1:~# gdisk /dev/xvdf
+
+    GPT fdisk (gdisk) version 0.8.8
+
+     
+
+    Partition table scan:
+
+      MBR: not present
+
+      BSD: not present
+
+      APM: not present
+
+      GPT: not present
+
+     
+
+    Creating new GPT entries.
+
+     
+
+    Command (? for help): p
+
+    Disk /dev/xvdf: 2097152 sectors, 1024.0 MiB
+
+    Logical sector size: 512 bytes
+
+    Disk identifier (GUID): AE372F98-80BF-4F9F-84BB-B9D0F087124E
+
+    Partition table holds up to 128 entries
+
+    First usable sector is 34, last usable sector is 2097118
+
+    Partitions will be aligned on 2048-sector boundaries
+
+    Total free space is 2097085 sectors (1024.0 MiB)
+
+     
+
+    Number  Start (sector)    End (sector)  Size       Code  Name
+
+     
+
+    Command (? for help): n
+
+    Partition number (1-128, default 1): 1
+
+    First sector (34-2097118, default = 2048) or {+-}size{KMGTP}: 
+
+    Last sector (2048-2097118, default = 2097118) or {+-}size{KMGTP}: 
+
+    Current type is 'Linux filesystem'
+
+    Hex code or GUID (L to show codes, Enter = 8300): 
+
+    Changed type of partition to 'Linux filesystem'
+
+     
+
+    Command (? for help): w
+
+     
+
+    Final checks complete. About to write GPT data. THIS WILL OVERWRITE EXISTING
+
+    PARTITIONS!!
+
+     
+
+    Do you want to proceed? (Y/N): y
+
+    OK; writing new GUID partition table (GPT) to /dev/xvdf.
+
+     
+
+    The operation has completed successfully.
+
+ 
+
+3. Format the partition as an 'ext3' filesystem. Give it a volume label of 'testpart'. Verify that a UUID has been created for it once it has been formatted.
+
+    root@tcox1:~# mke2fs -t ext3 -L testpart /dev/xvdf1
+
+    mke2fs 1.42.9 (4-Feb-2014)
+
+    Filesystem label=testpart
+
+    OS type: Linux
+
+    Block size=4096 (log=2)
+
+    Fragment size=4096 (log=2)
+
+    Stride=0 blocks, Stripe width=0 blocks
+
+    65536 inodes, 261883 blocks
+
+    13094 blocks (5.00%) reserved for the super user
+
+    First data block=0
+
+    Maximum filesystem blocks=268435456
+
+    8 block groups
+
+    32768 blocks per group, 32768 fragments per group
+
+    8192 inodes per group
+
+    Superblock backups stored on blocks: 
+
+    32768, 98304, 163840, 229376
+
+     
+
+    Allocating group tables: done                            
+
+    Writing inode tables: done                            
+
+    Creating journal (4096 blocks): done
+
+    Writing superblocks and filesystem accounting information: done
+
+     
+
+    root@tcox1:~# ls -al /dev/disk/by-uuid/
+
+    total 0
+
+    drwxr-xr-x 2 root root  80 Sep  7 16:27 .
+
+    drwxr-xr-x 6 root root 120 Sep  7 16:25 ..
+
+    lrwxrwxrwx 1 root root  11 Sep  7 16:27 09f1cbe8-2a81-4d2f-b7c1-5181a506c6b4 -> ../../xvdf1
+
+     
+
+    lrwxrwxrwx 1 root root  11 Sep  7 15:52 a09befc1-cf11-45ac-b1f4-52736ff06125 -> ../../xvda1
+
+ 
+
+4. Mount the drive using a directory called std' in the '/mnt' directory using the drive created in Step #3 above. Create a file called 'test.txt' in the newly mount partition and display it. 
+
+    root@tcox1:~# cd /mnt
+
+    root@tcox1:/mnt# mkdir std
+
+    root@tcox1:/mnt# mount -t ext3 /dev/xvdf1 /mnt/std
+
+    root@tcox1:/mnt# df -h
+
+    Filesystem      Size  Used Avail Use% Mounted on
+
+    /dev/xvda1       15G  2.4G   12G  17% /
+
+    none            4.0K     0  4.0K   0% /sys/fs/cgroup
+
+    udev            492M   12K  492M   1% /dev
+
+    tmpfs           100M  804K   99M   1% /run
+
+    none            5.0M     0  5.0M   0% /run/lock
+
+    none            497M   80K  497M   1% /run/shm
+
+    none            100M   16K  100M   1% /run/user
+
+    /dev/xvdf1      991M  1.3M  939M   1% /mnt/std
+
+    root@tcox1:/mnt# echo "Hello World" >> /mnt/std/test.txt
+
+    root@tcox1:/mnt# cat /mnt/std/test.txt 
+
+    Hello World
+
+     
+
+5. Unmount the partition. Verify that the drive is no longer mounted and that the file created in Step #4 is no longer there.
+
+    root@tcox1:/mnt# umount std
+
+    root@tcox1:/mnt# df -h
+
+    Filesystem      Size  Used Avail Use% Mounted on
+
+    /dev/xvda1       15G  2.4G   12G  17% /
+
+    none            4.0K     0  4.0K   0% /sys/fs/cgroup
+
+    udev            492M   12K  492M   1% /dev
+
+    tmpfs           100M  804K   99M   1% /run
+
+    none            5.0M     0  5.0M   0% /run/lock
+
+    none            497M   80K  497M   1% /run/shm
+
+    none            100M   16K  100M   1% /run/user
+
+    root@tcox1:/mnt# ls -al /mnt/std
+
+    total 8
+
+    drwxr-xr-x 2 root root 4096 Sep  7 16:28 .
+
+    drwxr-xr-x 3 root root 4096 Sep  7 16:28 ..
