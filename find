@@ -1,0 +1,22 @@
+Lab One 
+
+    Using the which command, find out where the binary file called iptables is installed.
+    Using the whereis command, repeat the above exercise being sure to tell your command to only search for binary files.
+    Build your local file cache DB by running the updatedb command, keep in mind this may take a few minutes.
+    Using the locate command, find all binary files on the system containing the string table, in any position in the file.
+
+which iptables
+whereis -b iptables
+updatedb
+locate table
+
+Lab 2
+
+    Use find to find all files named passwd in the /etc directory.
+    Use find to find all files that have been modified in the last three days.
+    In your home directory create three files that end with .txt. Now use find to find all files that end with .txt in your home directory and then delete them as part of the same command using -exec.
+
+find /etc -name "passwd"
+find / -mtime -3
+touch file1.txt; touch file2.txt; touch file3.txt
+find . -name '*.txt' -exec rm {} \;
