@@ -1,0 +1,25 @@
+
+    Using the appropriate command, display all filesystems currently mounted on your server, including special filesystems. Display the usage statistics of each in a practical and readable format.
+    Using either the fsck or e2fsck (depending on the format of your root partition), execute a filesystem check on the root partition of your server.
+    Display both the volume name and UUID of the root drive on your server and capture the results in your output file.
+    Create a file in your home directory called mytestfile.txt. List the inode of that file and note it in your output file. Remove the file you just created. Using debugfs, list the command needed to find the deleted file and capture the output of the command that shows the matching inode.
+    Using one of these utilities, obtain the same information for your output file as you would get using debugfs and the stat summary option.
+    Set the root partition of your server to the following:
+    i. Volume Name: SysUtilLab4
+    ii. Maximum Number of Mounts Before Check: 50
+    iii. Current Number of Mounts: 55
+    iv. Interval Between Checks: 2 Days
+
+ 
+Solution
+
+    df -h
+    This was a concept quesiton, if you were unable to successfully execute this it is because you cannot perform fsck on a partition while it is mounted (very important concept). Thus, we cannot perform one on the root device while the operating system is running. In old versions we could use the shutdown command to force a fsck on reboot. However, the most common way now is to boot using a live cd and running the fsck on the root file system.
+    There are a couple of ways to do this right now:
+        ls -al /dev/disk/by-uuid >> file.out && ls -al /dev/disk/by-partlabel >> file.out 
+        lsblk -o partlabel,uuid >> file.out
+        blkid >> file.out
+    Any of these will give you the appropriate output to your log file.
+    touch ~/myfile.txt && debugfs (note inode), then rm myfile.txt, then debugfs again, then lsdel and undel inode.
+    dumpe2fs
+    sudo tune2fs -L SysUtilLab4 -c 50 -C 55 -i 2d /dev/xvda1
