@@ -1,0 +1,65 @@
+1. Install the linux-image-extra-virtual package to enable quota kernel requirements, if you are usoing a lab or a virtual machine.
+
+sudo apt-get install linux-image-extra-virtual
+
+2. Install the quota package and the quotatool package
+
+sudo apt-get install quota quotatool
+
+ 
+
+3. Edit your fstab file to enable quotas on your root filesystem.
+
+sudo vim /etc/fstab
+
+ 
+
+    LABEL=cloudimg-rootfs   /        ext4   defaults,discard,usrquota,grpquota        0 0
+
+4. Remount your root partition.
+
+sudo mount -o remount /
+
+5. Build the quota database.
+
+sudo quotacheck -avugm
+
+    quotacheck: Your kernel probably supports journaled quota but you are not using it. Consider switching to journaled quota to avoid running quotacheck after an unclean shutdown.
+
+    quotacheck: Scanning /dev/disk/by-uuid/a09befc1-cf11-45ac-b1f4-52736ff06125 [/] done
+
+    quotacheck: Cannot stat old user quota file //aquota.user: No such file or directory. Usage will not be subtracted.
+
+    quotacheck: Cannot stat old group quota file //aquota.group: No such file or directory. Usage will not be subtracted.
+
+    quotacheck: Cannot stat old user quota file //aquota.user: No such file or directory. Usage will not be subtracted.
+
+    quotacheck: Cannot stat old group quota file //aquota.group: No such file or directory. Usage will not be subtracted.
+
+    quotacheck: Checked 17976 directories and 140172 files
+
+    quotacheck: Old file not found.
+
+     
+
+    quotacheck: Old file not found.
+
+6. Display all existing user quotas for all filesystems and log the output to '/home/user/log.out'.
+
+sudo repquota -a >> /home/user/log.out
+
+7. Using the appropriate command, edit/create the quota file that use to limit their disk usage to 500k.
+
+sudo edquota user
+
+    Disk quotas for user user (uid 1001):
+
+      Filesystem                   blocks       soft       hard     inodes     soft     hard
+
+      /dev/disk/by-uuid/a09befc1-cf11-45ac-b1f4-52736ff06125       1192          0      500        53        0        0
+
+     
+
+8. Using the report quota command, list the new quota for that user as applied, and log the output to '/home/user/log.out'.
+
+sudo repquota -s / >> /home/user/log.out
