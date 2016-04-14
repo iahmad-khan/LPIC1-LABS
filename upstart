@@ -1,0 +1,66 @@
+1. View system services and jobs that are managed by upstart 
+
+root@hostname: $ initctl list
+
+Alternatively you could view the conf files in /etc/init which is the new location for upstart jobs replacing the old location /etc/init.d/. However, for backwards compatibility /etc/init.d is still support with upstart.
+ 
+2. SSH is a job now managed by upstart in Ubuntu 14. Using Upstart restart the SSH service
+ 
+
+root@hostname: $ restart ssh
+
+3. Using the service command also restart the SSH service
+
+root@hostname: $ service ssh restart
+
+4. Create a new job that uses the logger command to create an entry into the /var/log/syslog log file stating the date and time the entry was run. The job should start when the system enters runlevel 4 and only runlevel4. you can use the /etc/init/cron.conf file as a starting template.Be sure to use the script stanza instead of the exec stanza. Name the configuration file 'logger.conf'
+
+root@hostname: $ cd /etc/init
+root@hostname: $ cp cron.conf logger.conf //(note the name of the conf file is fine whatever you had it as long as it ends in .conf)
+
+[logger.conf]
+description	"Logger service"
+start on runlevel [4]
+expect fork
+
+respawn
+script
+logger -f /var/log/syslog "Hello world! $(date)"
+end script
+[end logger.conf file]
+
+root@hostname: $ init-checkconf logger.conf
+
+root@hostname: $ initctl list | grep logger
+
+5. Get the default runlevel on the system
+
+root@hostname: $ runlevel
+N 2
+
+6. Test that the job is working by instructing your system to move into runlevel 4
+
+root@hostname: $ telinit 4
+root@hostname: $ status logger (note that once you add a job to the /etc/init/ directory you can control it with restart/stop/status/start as well
+
+7. Change back to your default runlevel on the system
+
+root@hostname: $ telinit 2
+
+8. View the SysLog file to verify the date has been entered with your message in the syslog
+
+root@hostname: $ cat /var/log/syslog | grep "hello"
+
+9. Change the logger.conf file so that the service starts in all the same run levels as the cron.conf job
+
+[logger.conf]
+description	"Logger service"
+start runlevel [2345]
+stop runlevel [!2345]
+
+expect fork
+respawn
+
+script
+ logger -f /var/log/syslog "Hello world! $(date)"
+end script[end logger.conf file]
