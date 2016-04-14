@@ -1,0 +1,92 @@
+
+
+1) Every file or application accessed or run is automatically assigned three streams when it is run.
+
+Correct
+Correct answer
+
+True
+
+2) Which grep flag or program will interpret the string as a literal and not an expression?
+
+Correct
+Correct answer
+
+fgrep
+
+3) The 'diff' command can only be used to display the differences between two files.
+
+Correct
+Correct answer
+
+False
+
+4) ls t* f* > results.txt 2>&1 has what result?
+
+Correct
+Correct answer
+
+Standard error is redirected to the same location as standard output
+
+5) &> redirects both standard output and standard error to the same place.
+
+Correct
+Correct answer
+
+True
+
+6) Pipes and redirects are identical in function.
+
+Correct
+Correct answer
+
+False
+
+7) ls g* y* &> results.txt will redirect standard output and not standard error to results.txt
+
+Correct
+Correct answer
+
+False
+
+8) Pipes are bi-directional.
+
+Correct
+Correct answer
+
+False
+
+9) A redirect is unidirectional (one way), either input or output only.
+
+Correct
+Correct answer
+
+False
+
+10) The 'split' command can be used to insert data into a file as well as break a file apart into various components.
+
+Correct
+Correct answer
+
+True
+
+11) The 'wc' command can display line, word, character or byte counts for any file passed to it.
+
+Correct
+Correct answer
+
+True
+
+12) What is the output of the following command: grep -E 'root|system' /etc/passwd
+
+Correct
+Correct answer
+
+Will grep for either root or system
+
+13) What is the output of the following command: cat /etc/passwd | wc -l
+
+Correct
+Correct answer
+
+Counts the number of lines in /etc/passwd
