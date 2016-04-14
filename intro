@@ -1,0 +1,231 @@
+Note: This exercise can be completed on a LinuxAcademy.com lab server; however, some of the solutions are specific to Debian/Ubuntu servers and some are specific to RHEL/CentOS servers.
+Part 1
+
+1. Start your Linux Academy server and log in. Create two users, john and jeff. Set their passwords and log in as both.
+
+ 
+
+    useradd -m jeff && useradd -m john
+    passwd jeff && passwd john
+
+    (&& means only perform the following command if the first one completed successfully)
+
+ 
+
+2.  Lock the user account added previously called john and log out and verify the account can no longer access the system. Then unlock john's account. Create two new groups called lagroup1 and lagroup2. Execute a command that will add the account jeff to both those groups. Use ONE command to add that account to both groups.
+
+ 
+
+    Open a new terminal/putty screen and connect to your server. Login as your user and then "su" into the root user. You will now have two terminals, one for your root user to perform actions and one to test locking users out.
+
+    From your root terminal type:
+
+    passwd -l john
+
+    From your other terminal attempt to login to the system with the user "john". You will notice it will not allow it. Now from your root terminal type:
+
+    passwd -u john
+
+    Try to login again. You will notice login is now allowed.
+
+    groupadd lagroup1 && groupadd lagroup2
+    usermod -aG lagroup1,lagroup2 jeff
+
+ 
+
+3.  Add the user jeff to the appropriate place so that user has the ability to execute commands with superuser/root privileges. While logged in as the user jeff, create a small text file with any content in the /root directory.
+
+ 
+
+    As the root user edit /etc/sudoers. If /etc/sudoers does not exist you need to install sudo: apt-get install sudo or yum install sudo
+
+    You can use visudo to edit the /etc/sudoers file but for certification reasons you should know how to edit the file manually.
+
+    Add jeff to the sudoers file, you can do this one of two ways:
+
+        Add the user directly in the file:
+
+        jeff ALL=(ALL)       ALL
+        Make sure the "wheel", "admin" or "sudo" option is not commented out and exists. (This will vary depending on distribution):
+
+        %wheel ALL=(ALL) NOPASSWD: ALL
+
+    If the wheel option is available we would then add jeff to the wheel group (% represents "group") at the command line type:
+
+    usermod -aG wheel jeff
+
+    NOTE: Debian/Ubuntu users might notice "sudo" or "admin" and not "wheel" is the default group. You can use that in place of wheel.
+
+    Log out of the system then log back in as jeff. As the jeff user type:
+
+    sudo touch file /root/test
+
+    This will create a file in the /root directory which only root can do.
+
+ 
+
+4.  Log in as root. Create a new directory in root's home directory called 'filemaintenance'. Change to that directory and create three "dummy files": file1, file2, and file3. Move back to the parent directory (root's home directory) and then copy the files located in filemaintenance to your home directory.
+
+ 
+
+    cd; mkdir filemaintenance
+
+    Note: just executing the 'cd' command will change you to your home directory.
+
+    cd filemaintenance; touch file1; touch file2; touch file3
+    cd ..
+    cp filemaintenance/* .
+
+    NOTE: The . it is part of the statement and means "current directory." (This command will copy all the files, directories, and sub directories in /home/youruser/filemaintenance directory into your /home/youruser directory (the filemaintenance parent directory).
+
+ 
+
+5.  Change back to your home directory, /root. Move the new 'filemaintenance' directory and all its contents into another directory called 'movedfiles'.
+
+ 
+
+    cd
+    mkdir movedfiles
+    mv filemaintenance/ movedfiles/
+
+ 
+
+6.  Lock the account john again. Log out of your system. Attempt to log into the system three times using the recently locked user account john. After the third failed attempt, log into your system as root and unlock the user. Then list the last 10 lines of the appropriate log file on the system that will show those failed login attempts.
+
+ 
+
+    Some systems use different auth logs. Depending on your distribution and version it will be one of the log files listed below
+
+    tail /var/log/auth.log OR tail /var/log/syslog  OR tail /var/log/secure
+
+ 
+
+7.  Logged in as root, search the filesystem for a configuration file called 'ld.so.conf' and display its location and path. List the contents of that file piped to a second file called 'ld.so.conf.out' in your home directory.
+
+ 
+
+    First we update the 'locate' database:
+
+    updatedb
+
+    Note:  If the command is not found then apt-get install locate or yum install locate
+
+    locate ld.so.conf
+    cat ld.so.conf > ~/ld.so.conf.out
+
+ 
+
+8.  Copy the following files into root's home directory: 
+
+    /etc/hosts
+    /var/log/dmesg
+    /usr/bin/whoami
+
+ 
+
+Change the permissions of each file as follows: 
+
+    hosts - only your user id can read/write/execute, no group or world access
+    dmesg - user account can read/write, group and everyone can read/execute
+    whoami - everyone can execute, no other permissions
+
+ 
+
+    cp /etc/hosts ~/; cp /var/log/dmesg ~/; cp /usr/bin/whoami ~/;
+    cd ~/
+    chmod 700 hosts
+    chmod 655 dmesg
+    chmod 111 whoami
+
+ 
+
+9.  Change the owner and group of all the files above to be owned by jeff.
+
+ 
+
+    chown jeff.jeff /root/hosts
+    chown jeff.jeff /root/whoami
+    chown jeff.jeff /root/dmesg
+    ls -al #to verify the changes have been made
+
+ 
+
+10.  Log in as root to your system, if you haven't already. For the remainder of this exercise you will need to be root. Create a cron job that lists all users in the home directory every day at noon and pipes that listing to a file in your home directory called 'cronoutput.out'.
+
+ 
+
+    crontab -e
+
+    Enter the following entry:
+
+    0 12 * * * ls /home > ~/cronoutput.out
+
+ 
+
+11. Create another cron job that runs the same process as the last one but at 15 minutes after every hour.
+
+ 
+
+    15 * * * * ls /home > ~/cronoutput.out
+
+ 
+
+12. Create another cron job  that runs the same process as the last two but every 3 minutes between midnight and 1:00 AM the 1st day of the month.
+
+ 
+
+    */3 0-1 1 * * ls /home > ~/cronoutput.out
+
+ 
+
+13.  Execute the command to prepare your system for package installations using apt-get or yum. Search available packages and descriptions for any reference to the 'apache' web server. Pipe those results to a file named 'search.out' in root's home directory.
+
+ 
+
+    Ubuntu/Debian
+
+    apt-get update
+    apt-cache search apache > ~/search.out
+
+    RHEL/CentOS
+
+    yum makecache fast
+    yum search apache > ~/search.out
+
+ 
+
+14.  Install all available system updates for your system. Once that is complete, using the information gathered in Lab 1, install the apache web server. When executing the installation, pass the appropriate parameter to the command line so you are not asked to confirm installation.
+
+ 
+
+    Ubuntu/Debian
+
+    apt-get upgrade
+    apt-get install apache2 -y
+
+    RHEL/CentOS
+
+    yum update
+    yum install httpd -y
+
+ 
+
+If you wish to use the exercise grader, please check your work on part 1 before continuing on to part 2. 
+
+ 
+Part 2
+
+Change the root password on your system to linuxtest. Log out and log back in as root. Remove the user john from the system, including the removal of /home/john.  
+
+ 
+
+    Type su to change the user to root.
+
+    passwd
+    logout
+
+    Log back into the root user by typing su on the command line.
+
+    userdel -r john
+
+    Note: this will remove the user, john, and the user's home directory.
