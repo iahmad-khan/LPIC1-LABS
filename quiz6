@@ -1,0 +1,169 @@
+
+
+1) The ‘setuid’ command will allow a file to run with the same permissions as the files owner rather than the permissions of the user accessing the file.
+
+Correct
+Correct answer
+
+True
+
+2) A hard link (ln) makes a copy of the original file. Any changes made to the copy will have to be duplicated manually in the original.
+
+Correct
+Correct answer
+
+False
+
+3) The following command – ‘tar zxvf linux.tar.gz’ – performs which of the following actions?
+
+Incorrect
+Correct answer
+
+Use gzip to uncompress, extract the contents, display verbose messages of the file ‘linux.tar.gz’
+
+4) If you want to find out how Linux will treat a specific file (whether binary application, man page, etc), you would use the following command:
+
+Correct
+Correct answer
+
+type
+
+5) Filenames in Linux are not case sensitive.
+
+Correct
+Correct answer
+
+False
+
+6) In the commands ‘cp’, ‘rm’ and ‘mv’, the ‘-r’ command line parameter has what function?
+
+Correct
+Correct answer
+
+recursive
+
+7) To create the path ‘/home/username/secret/file/location’, none of which exists, in one statement, which command would you use?
+
+Correct
+Correct answer
+
+mkdir –p /home/username/secret/file/location
+
+8) The ‘umask’ command can be changed either with octal notation or symbolic notation.
+
+Correct
+Correct answer
+
+True
+
+9) Issuing the command ‘newgrp’ if the group already exists, will change the users current group ID and then change the default group ownership of what?
+
+Correct
+Correct answer
+
+Subsequently created files or directories.
+
+10) The link command (ln) is equivalent to Windows:
+
+Correct
+Correct answer
+
+Shortcut Files
+
+11) Which of the following lists of filenames will the following statement return – ‘ls fun*.??t’
+
+Correct
+Correct answer
+
+functional.txt, funky.dst, funandgames.btt
+
+12) A soft link (ln –s) refers to the original file without making a copy of the original.
+
+Correct
+Correct answer
+
+True
+
+13) By default, the Linux copy command (cp) will NOT copy subdirectories and their files.
+
+Correct
+Correct answer
+
+True
+
+14) Issuing the command ‘newgrp’ will create the new group if it does not exist and then change the default group ownership of subsequently created files or directories.
+
+Incorrect
+Correct answer
+
+False
+
+15) The ‘find’ command uses the system file index database created with the ‘updatedb’ command.
+
+Correct
+Correct answer
+
+False
+
+16) In order to remove the empty directory and all subdirectories created above, which command line switch needs to be added to the ‘rmdir’ command?
+
+Incorrect
+Correct answer
+
+–p
+
+17) The /tmp directory is immutable.
+
+Correct
+Correct answer
+
+False
+
+18) In order to find if a specific man page exists on the system in the default system paths, you would use the following command:
+
+Correct
+Correct answer
+
+whereis
+
+19) The ‘chgroup’ command will change the default group your user belongs to.
+
+Correct
+Correct answer
+
+False
+
+20) The most common location for a system level binary application, script or utility is:
+
+Correct
+Correct answer
+
+/sbin
+
+21) The following command performs what action? dd if=/dev/sdf of=/backup/root.img
+
+Correct
+Correct answer
+
+Copies the contents of /dev/sdf to the file /backup/root.img
+
+22) The directory containing references to hardware connected to the Linux system is:
+
+Correct
+Correct answer
+
+/dev
+
+23) The command "dd if=/dev/zero of=/dev/xvdj bs=1M" will zero out a hard drive, erasing its content and filling it with zeros.
+
+Correct
+Correct answer
+
+True
+
+24) The remove command (rm) will remove all files and directories in the path indicated.
+
+Correct
+Correct answer
+
+False
