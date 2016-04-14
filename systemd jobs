@@ -1,0 +1,62 @@
+1. Create a new .service file named "mylogger.service" located in /etc/systemd/system directory, hint: you can copy sshd.service from /usr/lib/systemd/system if you want.
+
+ [root@linuxacademy]# cd /etc/systemd/system; cp /usr/lib/systemd/system/sshd.service mylogger.service
+
+2. Make sure the script executes only AFTER the sshd.service, service has been started.
+
+[Unit]
+Description=My logger service
+After=sshd.service
+
+3. In the [Service] section you can remove all settings except for ExecStart. 
+
+[Service]
+ExecStart
+
+4. Using the ExecStart option make it so that whenever the script is started it adds the following line "logger -f /var/log/messages "Hello world!".
+
+ExecStart=/usr/bin/logger -f /var/log/messages "Hello world! $(date)"
+
+5. In the [Install] section make it so that the WantedBy option starts the service, if the service is enabled, when the system enters the multi-user.target, once completed, save and exit.
+
+[Install]
+
+WantedBy=multi-user.target
+
+[Unit]
+Description=OpenSSH server daemon
+After=sshd.service
+
+[Service]
+ExecStart=/usr/bin/logger -f /var/log/messages "Hello world! $(date)"
+
+[Install]
+WantedBy=multi-user.target
+
+6. Using systemctl enable the service.
+
+[root@linuxacademy]# systemctl enable mylogger
+
+7. Using systemctl start the service.
+
+[root@linuxacademy]# systemctl start mylogger
+
+8. View the status of the mylogger service.
+
+[root@linuxacademy]# systemctl status mylogger
+
+9. Using tail verify that the logger service sent a message to the /var/log/messages log file.
+
+[root@linuxacademy]# tail -f /var/log/messages
+
+10. Reboot your system.
+
+[root@linuxacademy]# reboot
+
+11. Log back into the system and verify the service is running and also has added another line to the /var/log/messages log file.
+
+[root@linuxacademy]# tail -f /var/log/messages
+
+12. Send a global message to the system stating "It worked!"
+
+[root@linuxacademy]# wall "It worked!"
