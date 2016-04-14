@@ -1,0 +1,46 @@
+
+    Using the 'server lab' dialog "mount" a disk to your system. The mount will display on your system as either /dev/xvdf or /dev/xvdj. Navigate to the /dev directory and verify the mount is there.
+
+        Click the "Play" button under the "mount" heading on the LinuxAcademy server lab dialog.
+
+    Next partition the disk using fdisk and create a single disk partition with all the default values. Remember DOS type partition tables only allow 4 primary disk partitions but you only need to create 1. Changes on fdisk are only saved if you explicitly tell fdisk to write the changes.
+
+        fdisk /dev/xvdf (or /dev/xvdj)
+
+        m key inside of fdisk to display the available options. Select n for a new partition.
+
+        Select p for primary.
+
+        1 for partition number
+
+        Select defaults for the rest of the options
+
+        Write changes to disk  w. Remember if you do not do this your partition changes will not be written to the disk.
+
+    Make an ext4 file system on your new partition.
+
+        mkfs -t ext4 /dev/xvdf1 (or /dev/xvdj1)
+
+    Create a new directory located at /backups. Manually mount that partition, make sure it shows up in the command df –h
+
+        mkdir /backups; mount -t ext4 /dev/xvdf1 /backups or /dev/xvdj1 if that is your partition.
+
+        Verify it is mounted:
+
+        df -h
+
+    Add the partition to /etc/fstab so that it is automatically mounted. Once completed unmount all partitions and then remount all partitions with a single command. This verifies that it is entered correctly in /etc/fstab.
+
+        vi /etc/fstab
+
+        At the end of the file add /dev/xvdj1 /backups ext4 defaults 0 0  if it is required to use /xvdf1 use that.
+
+        :wq! (save and exit)
+
+        umount -a - This unmounts all partitions it can that are listed in the fstab file (/ wont be unmounted)
+
+        mount -a - This mounts all partitions listed in the fstab file
+
+        df -h - Verifies that it is mounted again. The fstab file is run when the system is loaded. All items listed in the fstab file will be automatically mounted during the boot process and unmounted during the shut down process.
+
+Assess Your Work: Control Mounting and Unmounting of Filesystems
