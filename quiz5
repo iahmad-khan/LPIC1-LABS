@@ -1,0 +1,64 @@
+
+
+1) The Which and Whereis commands operate identically when searching for files.
+
+Correct
+Correct answer
+
+False
+
+2) The command '[$] cat results.txt | wc -l' will display what output?
+
+Correct
+Correct answer
+
+The number of lines in the file 'results.txt'.
+
+3) The command "echo 'test' > test.txt" will overwrite the 'test.txt' file if it exist already.
+
+Correct
+Correct answer
+
+True
+
+4) The "time" command is used to display the current system time.
+
+Correct
+Correct answer
+
+False
+
+5) The "head" command shows only the meta tag portion of HTML files.
+
+Correct
+Correct answer
+
+False
+
+6) The "./program" command would be used to run a program named "program" in the current directory.
+
+Correct
+Correct answer
+
+True
+
+7) System wide environment variables (for every user) would be set in which file?
+
+Correct
+Correct answer
+
+/etc/profile
+
+8) Executing the command [$] command >>& result.txt
+
+Incorrect
+Correct answer
+
+Answer not listed
+
+9) A specific user can set environment variables for their user in which file?
+
+Correct
+Correct answer
+
+Both .bashrc and .bash_profile
