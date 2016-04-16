@@ -1,0 +1,539 @@
+
+
+1) Which command(s) are used to search and kill processes based on patterns or regular expressions instead of process id?
+
+Correct
+Correct answer
+
+pkill, pgrep
+
+2) Which command is used to unload a kernel module?
+
+Correct
+Correct answer
+
+rmmod
+
+3) Which command will find files modified at least 3 days ago in your current working directory?
+
+Correct
+Correct answer
+
+find . -mtime +3
+
+4) Which permission bit is used for read?
+
+Correct
+Correct answer
+
+4
+
+5) dpkg is a package manager used for installing .deb packages on debian/ubuntu systems.
+
+Correct
+Correct answer
+
+True
+
+6) How would you extract information about the boot process?
+
+Correct
+Correct answer
+
+Use the 'dmesg' command
+
+7) echo "hello" >> file.txt
+
+Correct
+Correct answer
+
+Will append hello at the end of file.txt
+
+8) While in vi command mode you type 3yy what is the result?
+
+Correct
+Correct answer
+
+Will yank 3 lines starting with the line your cursor is on.
+
+9) You're running an environment that has a GUI based interface installed on the system. Currently the default target is
+the multi-user target. Which task would you execute in order to change the default target the system changes into at boot time?
+
+Correct
+Correct answer
+
+systemctl set-default graphical.target
+
+10) /etc/ld.so.conf is used to store shared library paths.
+
+Correct
+Correct answer
+
+True
+
+11) If an executable file has the setuid octal bit of 4 applied what is the result?
+
+Correct
+Correct answer
+
+The file is executed with the same permissions as the user/group who owns the file
+
+12) What directory contains all the systems primary unit configuration files?
+
+Incorrect
+Correct answer
+
+/usr/lib/systemd/system
+
+13) If you need to see the total space used in the /home directory how would you do so?
+
+Correct
+Correct answer
+
+du -c /home
+
+14) You've modified your system and want to boot into the graphical target every time your system boots and completes 
+the boot process. In order make this persistent on your system so it boots into the graphical target each time the 
+system starts, what would you do?
+
+Correct
+Correct answer
+
+systemctl set-default graphical.target
+
+15) Which command allows you to view the contents of kernel messages in the kernel ring buffer?
+
+Correct
+Correct answer
+
+dmesg
+
+16) The nice priority ranges from:
+
+Correct
+Correct answer
+
+-20 (highest priority/most favorable) to 19 (lowest priority)
+
+17) After updating the timeout option in /etc/default/grub how do you apply the changes to the GRUB configuration file?
+
+Correct
+Correct answer
+
+grub-mkconfig > /boot/grub/grub.cfg
+
+18) While attempting to shutdown the apache service with "systemctl stop httpd" you notice that there are httpd 
+processes that are refusing to shut down. How might you send a SIGTERM signal to try and gently stop the processes 
+to all httpd processes?
+
+Correct
+Correct answer
+
+pkill httpd
+
+19) The export command is used to set environment variables.
+
+Correct
+Correct answer
+
+True
+
+20) set -o noclobber enables noclobber on your shell. What function does this perform?
+
+Correct
+Correct answer
+
+Prevents accidental overwrites of existing files.
+
+21) shutdown -f tells the boot process to skip running fsck on reboot, while -F forces fsck to run during the boot process.
+
+Incorrect
+Correct answer
+
+True
+
+22) Which command is used to insert a single module into the kernel?
+
+Correct
+Correct answer
+
+insmod
+
+23) Which utility (or utilities) can be used for creating and manage GPT partition tables?
+
+Correct
+Correct answer
+
+parted, gdisk
+
+24) You need to rerun the configuration of a deb package much like the configuration that was run during installation. 
+How would you do this?
+
+Correct
+Correct answer
+
+Use the dpkg-reconfigure command.
+
+25) You need to create a symbolic link with a target of /etc/passwd on /home/user/passwd. How would you do this?
+
+Correct
+Correct answer
+
+ln -s /etc/passwd /home/user/passwd
+
+26) /etc/passwd has the following syntax linuxacademy:x:501:10::/home/linuxacademy:/bin/bash What will cut -f1 -d: /etc/passwd 
+send to standard output?
+
+
+Correct answer
+
+It will display all the usernames and only the users names from /etc/passwd
+
+27) Which runlevel is used to shift the system from one state (running) to another (off)?
+
+Correct
+
+28) On a systemd based system you've just installed a MySQL server with no reported errors. However, after reboot you notice 
+the service is not running. What might be the issue?
+
+Correct
+Correct answer
+
+The service has not been enabled at boot time to start in the default target the system boots into
+
+29) telinit is used specifically for changing runlevels.
+
+Correct
+Correct answer
+
+True
+
+30) DMA addresses are used as an alternative to communicating with i/o ports.
+
+Correct
+Correct answer
+
+True
+
+31) Your GRUB2 install has come corrupt what might you do in order to resolve the issue?
+
+Correct
+Correct answer
+
+Recreate the grub.cfg configuration file grub-mkconfig > /boot/grub/grub.cfg, Reinstall the GRUB bootloader grub-install 
+/device
+
+32) The command shutdown -k
+
+Correct
+Correct answer
+
+Only sends a warning message but does not shut down the system.
+
+33) The modprobe command is:
+
+
+Correct answer
+
+Automatically loads any depended upon modules and is generally the preferred way of loading kernel modules
+
+34) Hard links cannot exist across file systems.
+
+Correct
+Correct answer
+
+True
+
+35) You need to create a file full of zeros that is 1gig in size. Which command will perform this action? Choose the "best" 
+possible answer.
+
+Correct
+Correct answer
+
+dd if=/dev/zero of=filename bs=1M count=1024
+
+36) Which file system stores files that are changed frequently?
+
+Correct
+Correct answer
+
+/var
+
+37) Brackets [] when used as part of grep are known as a character class.
+
+Correct
+Correct answer
+
+True
+
+38) The 'init' command is:
+
+Correct
+Correct answer
+
+The last process run during the boot process. It is responsible for launching all other system startup processes.
+
+39) Which file system contains information about interrupts, IRQ's, ioports, and dma addresses?
+
+Correct
+Correct answer
+
+/proc
+
+40) Shutdown -k will:
+
+Correct
+Correct answer
+
+Only send a warning message and not actually shut down the system.
+
+41) Which of the following will verify the signature on a package to determine its integrity and origin?
+
+Correct
+Correct answer
+
+rpm --checksig
+
+42) Section 7 of the manual contains:
+
+Correct
+Correct answer
+
+Miscellaneous (including macro packages and conven ‐ tions), e.g. man(7), groff(7)
+
+43) ln -s will:
+
+Correct
+Correct answer
+
+Create a symbolic link.
+
+44) Your working on a Linux system with systemd as it's primary init manager. In order to change into the graphical target, what would you do?
+
+Correct
+Correct answer
+
+systemctl isolate graphical.target
+
+45) You've created a Linux swap partition on /dev/xvdf using the mkswap command. Which command do you need to issue next in order to turn on swap?
+
+Correct
+Correct answer
+
+swapon /dev/xvdf
+
+46) Which character sequence will redirect standard output to standard error?
+
+Correct
+Correct answer
+
+1>&2
+
+47) If you want a command or process to continue running after exiting the system, which of these would you add to the 
+front of the command?
+
+
+Correct answer
+
+nohup
+
+48) cat /etc/passwd | grep [a-z]ot will send what to standard output?
+
+Correct
+Correct answer
+
+All alphabetical character sequences that end with the character sequences ot.
+
+49) Which command would you execute to cause the mysqld service to start anytime the system is booted into the 
+multi-user.target, assuming the unit configuration file already specifies a WantedBy=multi-user.target option?
+
+Correct
+Correct answer
+
+systemctl enable mysqld
+
+50) You've been tasked to manage an older Linux system running GRUB/GRUB-legacy. You're attempting to make kernel 
+changes to allow the system to boot into an alternate kernel version. Which configuration file needs to be edited?
+
+Correct
+Correct answer
+
+/boot/grub/menu.lst
+
+51) If a symbolic link source is removed the symbolic link becomes broken.
+
+Correct
+Correct answer
+
+True
+
+52) fsck is a process that checks and repairs the Linux file system and can only be performed on unmounted file systems.
+
+Correct
+Correct answer
+
+True
+
+53) Which command dumps ext2/ext3/ext4 filesystem information?
+
+Correct
+Correct answer
+
+dumpe2fs
+
+54) What happens when you set the setuid on a directory?
+
+Correct
+Correct answer
+
+It is ignored
+
+55) Select the best answer: echo "test" >> test.txt && echo "mysheet" >> test.txt
+
+Correct
+Correct answer
+
+The second echo command will only execute if the first echo command is successful
+
+56) The command cat /etc/passwd | grep ^root will:
+
+Correct
+Correct answer
+
+Display all the lines in the file that start with the pattern root.
+
+57) sigkill signal is:
+
+Correct
+Correct answer
+
+9
+
+58) How would you set read/write/execute for the owner and no permissions for group/world?
+
+Correct
+Correct answer
+
+chmod 700 file.txt
+
+59) GPT based partition tables can hold up to at least 128 primary partitions while MBR based partition tables can only 
+hold four primary partitions.
+
+Correct
+Correct answer
+
+True
+
+60) The -t flag when passed to mkfs requires you to:
+
+Correct
+Correct answer
+
+Specify the file system type.
+
+61) fsck -A will:
+
+Correct
+Correct answer
+
+Check all file systems listed in /etc/fstab
+
+62) id:3:initdefault sets the default runlevel for the system at 3.
+
+Correct
+Correct answer
+
+True
+
+63) uniq -d will:
+
+Correct
+Correct answer
+
+Print only duplicate lines in a file.
+
+64) Which command will display just the currently set environment variables for your bash session?
+
+Correct
+Correct answer
+
+env
+
+65) Run level 6 can be used to:
+
+Correct
+Correct answer
+
+Reboot the system
+
+66) The sticky bit, if enabled as a permission, has what effect?
+
+Correct
+Correct answer
+
+Only the directory's owner or file's owner can rename or delete files (chmod +t filename or chmod 1000) instead of 
+anybody with write permissions
+
+67) chmod 755 file.txt will:
+
+Correct
+Correct answer
+
+Set the file permissions on file.txt to read/write/execute for the owner and read/execute for the group and everyone else.
+
+68) Which flag, when passed to the shutdown command, will force a fsck to be run during the boot up process?
+
+Correct
+Correct answer
+
+-F
+
+69) dpkg -i file.deb
+
+Correct
+Correct answer
+
+Will install file.deb package.
+
+70) 0x82 Typcode represents the:
+
+Correct
+Correct answer
+
+Linux swap space
+
+71) How would you move a systemd based system into the graphical.target from the command line?
+
+Correct
+Correct answer
+
+systemctl isolate graphical.target
+
+72) Which grep variant will interpret the pattern as plain text strings (interpret the pattern literally)?
+
+Correct
+Correct answer
+
+fgrep or grep -F
+
+73) The command 'wall "shutdown occurring in 5 minutes" ', when issued at the command line will send all users on
+the system a global standard output message on their running terminal.
+
+Correct
+Correct answer
+
+True
+
+74) RPM -qpl will:
+
+Correct
+Correct answer
+
+List all files in an RPM file.
+
+75) You need to create a shared workspace for your accounting department. Every time a user inside a directory creates a file, that file or sub-directory needs to inherit the parent directory's group id. How would you accomplish this?
+
+Correct
+Correct answer
+
+Set the setgid flag on the parent directory (chmod g+s parent_directory)
