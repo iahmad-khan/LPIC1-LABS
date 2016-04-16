@@ -1,0 +1,29 @@
+
+
+1) Each filesystem that is intended to be controlled by disk quotas needs to be configured in the "/etc/fstab" file.
+
+Correct
+Correct answer
+
+True
+
+2) Disk quota support is not enabled by default on most distributions.
+
+Correct
+Correct answer
+
+True
+
+3) Warnings and errors when disk quotas are exceeded cause the filesystem in question to lock, preventing all write activity for the user exceeding their quota.
+
+Correct
+Correct answer
+
+True
+
+4) The command "repquota" will list the current status of quotas on all mounted partitions.
+
+Correct
+Correct answer
+
+True
