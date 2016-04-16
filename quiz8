@@ -1,0 +1,78 @@
+
+
+1) The 'e2fsck' command is used to check and repair EXT filesystems exclusively.
+
+Correct
+Correct answer
+
+True
+
+2) The command "mke2fs -t ext3 /dev/sda2" will result in what?
+
+Correct
+Correct answer
+
+An EXT3 formatted partition located in the disk identified as /dev/sda2.
+
+3) The command "du" displays the number of disk units on the current filesystem.
+
+Correct
+Correct answer
+
+False
+
+4) Which parameter for the command "tune2fs" will set the number of times a device can be mounted before a filesystem check is forced on reboot?
+
+Correct
+Correct answer
+
+-c
+
+5) Which filesystems can be mounted with the "mount" command?
+
+Correct
+Correct answer
+
+All listed answers
+
+6) e2fsck is used to check ext2/ext3/ext4 file systems.
+
+Correct
+Correct answer
+
+True
+
+7) "dumpe2fs" and "debugfs" are equivalent commands.
+
+Correct
+Correct answer
+
+False
+
+8) The "df" command will display the total and used space for every mounted filesystem.
+
+Correct
+Correct answer
+
+True
+
+9) In order to use the 'fsck' command to repair a filesystem, the filesystem being repaired must not be mounted.
+
+Correct
+Correct answer
+
+True
+
+10) The XFS filesystem is installed by default on all modern Linux distributions.
+
+Correct
+Correct answer
+
+False
+
+11) Which configuration file will indicate whether XFS is an available filesystem for use on your system?
+
+Correct
+Correct answer
+
+/proc/filesystems
